@@ -1,0 +1,16 @@
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\PhoneBook.exe
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\PhoneBook.deps.json
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\PhoneBook.runtimeconfig.json
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\PhoneBook.runtimeconfig.dev.json
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\PhoneBook.dll
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\ref\PhoneBook.dll
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\bin\Debug\net5.0\PhoneBook.pdb
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.csproj.AssemblyReference.cache
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.AssemblyInfoInputs.cache
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.AssemblyInfo.cs
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.csproj.CoreCompileInputs.cache
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.dll
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\ref\PhoneBook.dll
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.pdb
+C:\Users\79627\source\repos\PhoneBook\PhoneBook\obj\Debug\net5.0\PhoneBook.genruntimeconfig.cache
