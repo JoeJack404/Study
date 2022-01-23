@@ -36,13 +36,19 @@ namespace HashTable
             else
             {
                 string[] newTable = new string[Table.Length];
-                Array.Copy(Table, 0, newTable, 0, Table.Length);
+                Array.Copy(Table, newTable, Table.Length);
                 Array.Clear(Table, 0, Table.Length);
                 Array.Resize(ref Table, Table.Length + 100);
                 foreach (string oldValue in newTable)
                 {
-                    int newPosition = HashFunction(oldValue, Table.Length + 100);
-                    Table[newPosition] = oldValue;
+                    if (oldValue == null)
+                    {
+                    }
+                    else
+                    {
+                        int newPosition = HashFunction(oldValue, Table.Length + 100);
+                        Table[newPosition] = oldValue;
+                    }
                 }
                 Add(value);
                 return true;
