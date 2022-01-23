@@ -12,7 +12,14 @@ namespace HashTable
 
         private int HashFunction(string value, int sizeTable = 100)
         {
-            return 1;
+            double hashResult = 0;
+            for (int i = 0; i < value.Length; i ++)
+            {
+                char symbol = value[i];
+                hashResult = Math.Pow(2, i) * Convert.ToInt32(symbol) + hashResult;
+            }
+            double result = hashResult % sizeTable;
+            return Convert.ToInt32(result);
         }
 
         public bool Add(string value)

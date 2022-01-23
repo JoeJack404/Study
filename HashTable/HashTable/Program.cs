@@ -6,7 +6,11 @@ namespace HashTable
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("sdfr");
+            hashtable.Add("ddff");
+            hashtable.Add("dfhghhj");
+            hashtable.Add("asd");
         }
     }
 }
