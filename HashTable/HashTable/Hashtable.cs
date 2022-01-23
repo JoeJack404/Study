@@ -9,8 +9,7 @@ namespace HashTable
     class Hashtable
     {
         private string[] Table = new string[100];
-
-        private int HashFunction(string value, int sizeTable = 100)
+        private int HashFunction(string value, int sizeTable)
         {
             double hashResult = 0;
             for (int i = 0; i < value.Length; i ++)
@@ -24,22 +23,29 @@ namespace HashTable
 
         public bool Add(string value)
         {
-            int position = HashFunction(value);
+            int position = HashFunction(value, Table.Length);
             if (Table[position] == null)
             {
                 Table[position] = value;
                 return true;
             }
+            else if (Table[position] == value)
+            {
+                return false;
+            }
             else
             {
-                //Array.Resize(ref Table, Table.Length + 100);
-                //foreach (string oldValue in Table)
-                //{
-                //    int newPosition = HashFunction(oldValue, Table.Length + 100);
-                //    Table[newPosition] = oldValue;
-                //}
-                //Add(value);
-                return false;
+                string[] newTable = new string[Table.Length];
+                Array.Copy(Table, 0, newTable, 0, Table.Length);
+                Array.Clear(Table, 0, Table.Length);
+                Array.Resize(ref Table, Table.Length + 100);
+                foreach (string oldValue in newTable)
+                {
+                    int newPosition = HashFunction(oldValue, Table.Length + 100);
+                    Table[newPosition] = oldValue;
+                }
+                Add(value);
+                return true;
             }
         }
     }
