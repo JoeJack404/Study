@@ -8,7 +8,7 @@ namespace HashTable
 {
     class Hashtable
     {
-        private string[] Table = new string[100];
+        private string[] table = new string[100];
         private int HashFunction(string value, int sizeTable)
         {
             double hashResult = 0;
@@ -23,22 +23,22 @@ namespace HashTable
 
         public bool Add(string value)
         {
-            int position = HashFunction(value, Table.Length);
-            if (Table[position] == null)
+            int position = HashFunction(value, table.Length);
+            if (table[position] == null)
             {
-                Table[position] = value;
+                table[position] = value;
                 return true;
             }
-            else if (Table[position] == value)
+            else if (table[position] == value)
             {
                 return false;
             }
             else
             {
-                string[] newTable = new string[Table.Length];
-                Array.Copy(Table, newTable, Table.Length);
-                Array.Clear(Table, 0, Table.Length);
-                Array.Resize(ref Table, Table.Length + 100);
+                string[] newTable = new string[table.Length];
+                Array.Copy(table, newTable, table.Length);
+                Array.Clear(table, 0, table.Length);
+                Array.Resize(ref table, table.Length + 100);
                 foreach (string oldValue in newTable)
                 {
                     if (oldValue == null)
@@ -46,12 +46,47 @@ namespace HashTable
                     }
                     else
                     {
-                        int newPosition = HashFunction(oldValue, Table.Length + 100);
-                        Table[newPosition] = oldValue;
+                        int newPosition = HashFunction(oldValue, table.Length + 100);
+                        table[newPosition] = oldValue;
                     }
                 }
                 Add(value);
                 return true;
+            }
+        }
+
+        public bool CheckRecord(string value)
+        {
+            int position = HashFunction(value, table.Length);
+            if (table[position] == null)
+            {
+                return false;
+            }
+            else if (table[position] == value)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool RemoveRecord(string value)
+        {
+            int position = HashFunction(value, table.Length);
+            if (table[position] == null)
+            {
+                return false;
+            }
+            else if (table[position] == value)
+            {
+                Array.Clear(table, position, 1);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

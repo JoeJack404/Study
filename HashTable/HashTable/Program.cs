@@ -11,6 +11,38 @@ namespace HashTable
             hashtable.Add("ddff");
             hashtable.Add("dfhghhj");
             hashtable.Add("asd");
+            if (hashtable.CheckRecord("ddff"))
+            {
+                Console.WriteLine("Записб есть");
+            }
+            else
+            {
+                Console.WriteLine("Записи нет");
+            }
+            if (hashtable.CheckRecord("drtff"))
+            {
+                Console.WriteLine("Записб есть");
+            }
+            else
+            {
+                Console.WriteLine("Записи нет");
+            }
+            if (hashtable.RemoveRecord("ddff"))
+            {
+                Console.WriteLine("Записб удалена");
+            }
+            else
+            {
+                Console.WriteLine("Запись не удалена");
+            }
+            if (hashtable.CheckRecord("ddff"))
+            {
+                Console.WriteLine("Записб есть");
+            }
+            else
+            {
+                Console.WriteLine("Записи нет");
+            }
         }
     }
 }
