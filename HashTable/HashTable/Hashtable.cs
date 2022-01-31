@@ -9,10 +9,11 @@ namespace HashTable
     class Hashtable
     {
         private string[] table = new string[100];
-        private int HashFunction(string value, int sizeTable)
+        public delegate int HashFunction(string value, int sizeTable);
+        private int DefaultHashFunction(string value, int sizeTable)
         {
             double hashResult = 0;
-            for (int i = 0; i < value.Length; i ++)
+            for (int i = 0; i < value.Length; i++)
             {
                 char symbol = value[i];
                 hashResult = Math.Pow(2, i) * Convert.ToInt32(symbol) + hashResult;
@@ -21,9 +22,9 @@ namespace HashTable
             return Convert.ToInt32(result);
         }
 
-        public bool Add(string value)
+        public bool TryAdd(string value)  // TryAdd
         {
-            int position = HashFunction(value, table.Length);
+            int position = DefaultHashFunction(value, table.Length);
             if (table[position] == null)
             {
                 table[position] = value;
@@ -38,7 +39,7 @@ namespace HashTable
                 string[] newTable = new string[table.Length];
                 Array.Copy(table, newTable, table.Length);
                 Array.Clear(table, 0, table.Length);
-                Array.Resize(ref table, table.Length + 100);
+                Array.Resize(ref table, table.Length * 3);
                 foreach (string oldValue in newTable)
                 {
                     if (oldValue == null)
@@ -46,40 +47,25 @@ namespace HashTable
                     }
                     else
                     {
-                        int newPosition = HashFunction(oldValue, table.Length + 100);
+                        int newPosition = DefaultHashFunction(oldValue, table.Length * 3);
                         table[newPosition] = oldValue;
                     }
                 }
-                Add(value);
+                TryAdd(value);
                 return true;
             }
         }
 
-        public bool CheckRecord(string value)
+        public bool IsContain(string value)   //IsContain
         {
-            int position = HashFunction(value, table.Length);
-            if (table[position] == null)
-            {
-                return false;
-            }
-            else if (table[position] == value)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            int position = DefaultHashFunction(value, table.Length);
+            return table[position] == value;
         }
 
-        public bool RemoveRecord(string value)
+        public bool RemoveContain(string value)
         {
-            int position = HashFunction(value, table.Length);
-            if (table[position] == null)
-            {
-                return false;
-            }
-            else if (table[position] == value)
+            int position = DefaultHashFunction(value, table.Length);
+            if (table[position] == value)
             {
                 Array.Clear(table, position, 1);
                 return true;

@@ -7,11 +7,11 @@ namespace HashTable
         static void Main(string[] args)
         {
             Hashtable hashtable = new Hashtable();
-            hashtable.Add("sdfr");
-            hashtable.Add("ddff");
-            hashtable.Add("dfhghhj");
-            hashtable.Add("asd");
-            if (hashtable.CheckRecord("ddff"))
+            hashtable.TryAdd("sdfr");
+            hashtable.TryAdd("ddff");
+            hashtable.TryAdd("dfhghhj");
+            hashtable.TryAdd("asd");
+            if (hashtable.IsContain("ddff"))
             {
                 Console.WriteLine("Записб есть");
             }
@@ -19,7 +19,7 @@ namespace HashTable
             {
                 Console.WriteLine("Записи нет");
             }
-            if (hashtable.CheckRecord("drtff"))
+            if (hashtable.IsContain("drtff"))
             {
                 Console.WriteLine("Записб есть");
             }
@@ -27,7 +27,7 @@ namespace HashTable
             {
                 Console.WriteLine("Записи нет");
             }
-            if (hashtable.RemoveRecord("ddff"))
+            if (hashtable.RemoveContain("ddff"))
             {
                 Console.WriteLine("Записб удалена");
             }
@@ -35,7 +35,7 @@ namespace HashTable
             {
                 Console.WriteLine("Запись не удалена");
             }
-            if (hashtable.CheckRecord("ddff"))
+            if (hashtable.IsContain("ddff"))
             {
                 Console.WriteLine("Записб есть");
             }
