@@ -10,7 +10,8 @@ namespace HashTable
     {
         private string[] table = new string[100];
         public delegate int HashFunction(string value, int sizeTable);
-        private int DefaultHashFunction(string value, int sizeTable)
+        private static HashFunction currentHashFunction = DefaultHashFunction;
+        private static int DefaultHashFunction(string value, int sizeTable)
         {
             double hashResult = 0;
             for (int i = 0; i < value.Length; i++)
@@ -24,7 +25,7 @@ namespace HashTable
 
         public bool TryAdd(string value)  // TryAdd
         {
-            int position = DefaultHashFunction(value, table.Length);
+            int position = currentHashFunction(value, table.Length);
             if (table[position] == null)
             {
                 table[position] = value;
@@ -58,13 +59,13 @@ namespace HashTable
 
         public bool IsContain(string value)   //IsContain
         {
-            int position = DefaultHashFunction(value, table.Length);
+            int position = currentHashFunction(value, table.Length);
             return table[position] == value;
         }
 
         public bool RemoveContain(string value)
         {
-            int position = DefaultHashFunction(value, table.Length);
+            int position = currentHashFunction(value, table.Length);
             if (table[position] == value)
             {
                 Array.Clear(table, position, 1);
@@ -73,6 +74,18 @@ namespace HashTable
             else
             {
                 return false;
+            }
+        }
+
+        public void ChangeHashFunction(HashFunction hashFunction)
+        {
+            currentHashFunction = hashFunction;
+            foreach (string contain in table)
+            {
+                if (contain != null)
+                {
+                    TryAdd(contain);
+                }
             }
         }
     }
