@@ -11,6 +11,7 @@ namespace HashTable
             hashtable.TryAdd("ddff");
             hashtable.TryAdd("dfhghhj");
             hashtable.TryAdd("asd");
+            hashtable.TryAdd("aaa");
             if (hashtable.IsContain("ddff"))
             {
                 Console.WriteLine("Записб есть");
@@ -55,6 +56,7 @@ namespace HashTable
                 return hashResult % size;
             }
             hashtable.ChangeHashFunction(SumString);
+            hashtable.TryAdd("aaa");
         }
     }
 }
