@@ -48,7 +48,7 @@ namespace HashTable
                     }
                     else
                     {
-                        int newPosition = DefaultHashFunction(oldValue, table.Length * 3);
+                        int newPosition = currentHashFunction(oldValue, table.Length * 3);
                         table[newPosition] = oldValue;
                     }
                 }
@@ -76,15 +76,18 @@ namespace HashTable
                 return false;
             }
         }
-
+        
         public void ChangeHashFunction(HashFunction hashFunction)
         {
             currentHashFunction = hashFunction;
-            foreach (string contain in table)
+            string[] newTable = new string[table.Length];
+            Array.Copy(table, newTable, table.Length);
+            Array.Clear(table, 0, table.Length);
+            foreach (string oldValue in newTable)
             {
-                if (contain != null)
+                if (oldValue != null)
                 {
-                    TryAdd(contain);
+                    TryAdd(oldValue);
                 }
             }
         }
