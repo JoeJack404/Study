@@ -80,7 +80,10 @@ namespace HashTable
         public bool TryAdd(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if ()
+            if (table[position].tF.Contains(value))
+            {
+
+            }
 
         }
         
