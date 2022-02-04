@@ -8,7 +8,7 @@ namespace HashTable
 {
     class Hashtable
     {
-        private TableField[] table = new TableField[100];
+        private List<string>[] table = new List<string>[100];
         public delegate int HashFunction(string value, int sizeTable);
         private static HashFunction currentHashFunction = DefaultHashFunction;
         private static int DefaultHashFunction(string value, int sizeTable)
@@ -80,26 +80,50 @@ namespace HashTable
         public bool TryAdd(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if (table[position].tF.Contains(value))
+            if (table[position].Contains(value))
             {
-
+                return false;
             }
+            else
+            {
+                table[position].Add(value);
+                return true;
+            }
+        }
 
+        public bool IsContain(string value)
+        {
+            int position = currentHashFunction(value, table.Length);
+            return table[position].Contains(value);
+        }
+
+        public bool RemoveContain(string value)
+        {
+            int position = currentHashFunction(value, table.Length);
+            if (table[position].Contains(value))
+            {
+                table[position].Remove(value);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
         public void ChangeHashFunction(HashFunction hashFunction)
         {
             currentHashFunction = hashFunction;
-            TableField[] newTable = new TableField[table.Length];
+            List<string>[] newTable = new List<string>[table.Length];
             Array.Copy(table, newTable, table.Length);
             Array.Clear(table, 0, table.Length);
-            foreach (TableField oldField in newTable)
+            foreach (List<string> field in newTable)
             {
-                if (oldField != null)
-                {
-                    foreach (string oldValue in oldField)
-                    TryAdd(oldValue);
-                }
+                foreach (string value in field)
+                    if (value != null)
+                    {
+                        TryAdd(value);
+                    }
             }
         }
     }
