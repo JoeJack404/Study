@@ -56,7 +56,7 @@ namespace HashTable
             //    return 1;
             //}
             //hashtable.ChangeHashFunction(SumString);
-            hashtable.TryAdd("aaa");
+            //hashtable.TryAdd("aaa");
         }
     }
 }
