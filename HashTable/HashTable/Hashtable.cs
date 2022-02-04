@@ -87,13 +87,14 @@ namespace HashTable
         public void ChangeHashFunction(HashFunction hashFunction)
         {
             currentHashFunction = hashFunction;
-            string[] newTable = new string[table.Length];
+            TableField[] newTable = new TableField[table.Length];
             Array.Copy(table, newTable, table.Length);
             Array.Clear(table, 0, table.Length);
-            foreach (string oldValue in newTable)
+            foreach (TableField oldField in newTable)
             {
-                if (oldValue != null)
+                if (oldField != null)
                 {
+                    foreach (string oldValue in oldField)
                     TryAdd(oldValue);
                 }
             }

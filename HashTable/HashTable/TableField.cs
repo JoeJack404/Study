@@ -8,8 +8,8 @@ namespace HashTable
 {
     class TableField
     {
-        private List<string> tableFlied = new List<string>();
+        private List<string> tableField = new List<string>();
 
-        public List<string> tF { get { return tableFlied} set { tableFlied.Add(value); } }
+        public List<string> tF { get { return tableField} set { tableField.Add(value); } }
     }
 }
