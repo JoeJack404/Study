@@ -76,11 +76,22 @@ namespace HashTable
         //        return false;
         //    }
         //}
+        private bool IsNullCheck(int position)
+        {
+            if (table[position] == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         public bool TryAdd(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if (table[position] == null)
+            if (!IsNullCheck(position))
             {
                 table[position] = new List<string>();
                 table[position].Add(value);
@@ -100,7 +111,7 @@ namespace HashTable
         public bool IsContain(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if (table[position] == null)
+            if (!IsNullCheck(position))
             {
                 return false;
             }
@@ -113,10 +124,17 @@ namespace HashTable
         public bool TryRemove(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if (table[position].Contains(value))
+            if (IsNullCheck(position))
             {
-                table[position].Remove(value);
-                return true;
+                if (table[position].Contains(value))
+                {
+                    table[position].Remove(value);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
