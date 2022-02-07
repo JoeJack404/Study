@@ -154,10 +154,7 @@ namespace HashTable
                 {
                     foreach (string value in field)
                     {
-                        if (value != null)
-                        {
-                            TryAdd(value);
-                        }
+                        TryAdd(value);
                     }
                 }
             }
