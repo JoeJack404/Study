@@ -80,24 +80,37 @@ namespace HashTable
         public bool TryAdd(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if (table[position].Contains(value))
+            if (table[position] == null)
             {
-                return false;
+                table[position] = new List<string>();
+                table[position].Add(value);
+                return true;
             }
-            else
+            else if (!table[position].Contains(value))
             {
                 table[position].Add(value);
                 return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
         public bool IsContain(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            return table[position].Contains(value);
+            if (table[position] == null)
+            {
+                return false;
+            }
+            else
+            {
+                return table[position].Contains(value);
+            }
         }
 
-        public bool RemoveContain(string value)
+        public bool TryRemove(string value)
         {
             int position = currentHashFunction(value, table.Length);
             if (table[position].Contains(value))
@@ -119,11 +132,16 @@ namespace HashTable
             Array.Clear(table, 0, table.Length);
             foreach (List<string> field in newTable)
             {
-                foreach (string value in field)
-                    if (value != null)
+                if (field != null)
+                {
+                    foreach (string value in field)
                     {
-                        TryAdd(value);
+                        if (value != null)
+                        {
+                            TryAdd(value);
+                        }
                     }
+                }
             }
         }
     }
