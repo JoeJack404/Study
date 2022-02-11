@@ -111,14 +111,7 @@ namespace HashTable
         public bool IsContain(string value)
         {
             int position = currentHashFunction(value, table.Length);
-            if (table[position] == null)
-            {
-                return false;
-            }
-            else
-            {
-                return table[position].Contains(value);
-            }
+            return table[position] == null ? false : table[position].Contains(value);
         }
 
         public bool TryRemove(string value)
