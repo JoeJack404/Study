@@ -10,23 +10,41 @@ namespace BinaryTree
     {
         private Knot root;
 
-        public void TryAddKnot(int data)
+        public void AddKnot(int data)
         {
             if (root == null)
             {
-                root.Data = data;
-                root.Left = null;
-                root.Right = null;
+                Knot knot = new Knot();
+                knot.Data = data;
+                root = knot;
             }
             else if (root.Data > data)
             {
-                root = root.Left;
-                TryAddKnot(data);
+                if (root.Left == null)
+                {
+                    Knot knot = new Knot();
+                    knot.Data = data;
+                    root.Left = knot;
+                }
+                else
+                {
+                    root = root.Left;
+                    AddKnot(data);
+                }
             }
             else
             {
-                root = root.Right;
-                TryAddKnot(data);
+                if (root.Right == null)
+                {
+                    Knot knot = new Knot();
+                    knot.Data = data;
+                    root.Right = knot;
+                }
+                else
+                {
+                    root = root.Right;
+                    AddKnot(data);
+                }
             }
         }
 
@@ -43,14 +61,12 @@ namespace BinaryTree
             else if (root.Data > data)
             {
                 root = root.Left;
-                IsContain(data);
-                return true;
+                return IsContain(data);
             }
             else
             {
                 root = root.Right;
-                IsContain(data);
-                return true;
+                return IsContain(data);
             }
         }
     }

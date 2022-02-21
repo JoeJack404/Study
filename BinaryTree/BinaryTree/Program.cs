@@ -6,7 +6,15 @@ namespace BinaryTree
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BinaryTree binaryTree = new BinaryTree();
+            binaryTree.AddKnot(10);
+            binaryTree.AddKnot(6);
+            binaryTree.AddKnot(8);
+            binaryTree.AddKnot(4);
+            binaryTree.AddKnot(12);
+            binaryTree.AddKnot(11);
+            binaryTree.AddKnot(5);
+            binaryTree.IsContain(5);
         }
     }
 }
