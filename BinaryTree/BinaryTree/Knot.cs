@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace BinaryTree
 {
     class Knot
-    { 
+    {
         public int Data { get; set; }
-        public Knot Left { get; set; }
-        public Knot Right { get; set; }
+        public BinaryTree Left { get; set; }
+        public BinaryTree Right { get; set; }
     }
 }

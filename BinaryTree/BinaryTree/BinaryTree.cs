@@ -6,44 +6,42 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    class BinaryTree
+    class BinaryTree : Knot
     {
-        private Knot root;
+        private BinaryTree root;
+        //private int data;
+        //private BinaryTree left;
+        //private BinaryTree right;
 
         public void AddKnot(int data)
         {
             if (root == null)
             {
-                Knot knot = new Knot();
-                knot.Data = data;
-                root = knot;
+                root = new BinaryTree();
+                root.Data = data;
             }
             else if (root.Data > data)
             {
                 if (root.Left == null)
                 {
-                    Knot knot = new Knot();
-                    knot.Data = data;
-                    root.Left = knot;
+                    root.Left = new BinaryTree();
+                    root.Left.Data = data;
                 }
                 else
                 {
-                    root = root.Left;
-                    AddKnot(data);
+                    root.Left.AddKnot(data);
                 }
             }
             else
             {
                 if (root.Right == null)
                 {
-                    Knot knot = new Knot();
-                    knot.Data = data;
-                    root.Right = knot;
+                    root.Right = new BinaryTree();
+                    root.Right.Data = data;
                 }
                 else
                 {
-                    root = root.Right;
-                    AddKnot(data);
+                    root.Right.AddKnot(data);
                 }
             }
         }
@@ -60,13 +58,11 @@ namespace BinaryTree
             }
             else if (root.Data > data)
             {
-                root = root.Left;
-                return IsContain(data);
+                return root.Left.IsContain(data);
             }
             else
             {
-                root = root.Right;
-                return IsContain(data);
+                return root.Right.IsContain(data);
             }
         }
     }
