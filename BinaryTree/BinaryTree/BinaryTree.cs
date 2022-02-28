@@ -9,9 +9,6 @@ namespace BinaryTree
     class BinaryTree
     {
         private Knot root;
-        //private int data;
-        //private BinaryTree left;
-        //private BinaryTree right;
 
         public void AddKnot(int data)
         {
@@ -26,24 +23,16 @@ namespace BinaryTree
             }
         }
 
-        //public bool IsContain(int data)
-        //{
-        //    if (root == null)
-        //    {
-        //        return false;
-        //    }
-        //    else if (root.Data == data)
-        //    {
-        //        return true;
-        //    }
-        //    else if (root.Data > data)
-        //    {
-        //        return root.Left.IsContain(data);
-        //    }
-        //    else
-        //    {
-        //        return root.Right.IsContain(data);
-        //    }
-        //}
+        public bool IsContain(int data)
+        {
+            if (root == null)
+            {
+                return false;
+            }
+            else
+            {
+                return root.IsContain(root, data);
+            }
+        }
     }
 }

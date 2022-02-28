@@ -39,5 +39,25 @@ namespace BinaryTree
                 }
             }
         }
+
+        public bool IsContain(Knot knot, int data)
+        {
+            if (knot == null)
+            {
+                return false;
+            }
+            else if (knot.Data == data)
+            {
+                return true;
+            }
+            else if (knot.Data > data)
+            {
+                return IsContain(knot.Left, data);
+            }
+            else
+            {
+                return IsContain(knot.Right, data);
+            }
+        }
     }
 }
