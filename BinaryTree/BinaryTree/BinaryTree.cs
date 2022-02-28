@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    class BinaryTree : Knot
+    class BinaryTree
     {
-        private BinaryTree root;
+        private Knot root;
         //private int data;
         //private BinaryTree left;
         //private BinaryTree right;
@@ -17,53 +17,33 @@ namespace BinaryTree
         {
             if (root == null)
             {
-                root = new BinaryTree();
+                root = new Knot();
                 root.Data = data;
-            }
-            else if (root.Data > data)
-            {
-                if (root.Left == null)
-                {
-                    root.Left = new BinaryTree();
-                    root.Left.Data = data;
-                }
-                else
-                {
-                    root.Left.AddKnot(data);
-                }
             }
             else
             {
-                if (root.Right == null)
-                {
-                    root.Right = new BinaryTree();
-                    root.Right.Data = data;
-                }
-                else
-                {
-                    root.Right.AddKnot(data);
-                }
+                root.Add(root, data);
             }
         }
 
-        public bool IsContain(int data)
-        {
-            if (root == null)
-            {
-                return false;
-            }
-            else if (root.Data == data)
-            {
-                return true;
-            }
-            else if (root.Data > data)
-            {
-                return root.Left.IsContain(data);
-            }
-            else
-            {
-                return root.Right.IsContain(data);
-            }
-        }
+        //public bool IsContain(int data)
+        //{
+        //    if (root == null)
+        //    {
+        //        return false;
+        //    }
+        //    else if (root.Data == data)
+        //    {
+        //        return true;
+        //    }
+        //    else if (root.Data > data)
+        //    {
+        //        return root.Left.IsContain(data);
+        //    }
+        //    else
+        //    {
+        //        return root.Right.IsContain(data);
+        //    }
+        //}
     }
 }
