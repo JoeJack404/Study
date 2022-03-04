@@ -87,22 +87,24 @@ namespace BinaryTree
         {
             if (!IsContain(root, data))
             {
-                return IsContain(root, data);
+                return false;
+            }
+            else if (root.Data == data)
+            {
+                Console.WriteLine("Удалить корневой элемент нельзя");
+                return false;
             }
             else
             {
                 Knot removeKnot = GetKnot(root, data);
                 RemoveKnot(removeKnot);
+                return true;
             }
         }
 
         private bool RemoveKnot(Knot knot)
         {
-            if (knot == null)
-            {
-                return false;
-            }
-            else if (knot.Left == null & knot.Right == null)
+            if (knot.Left == null & knot.Right == null)
             {
                 knot = null;
                 return true;
@@ -140,13 +142,17 @@ namespace BinaryTree
             }
         }
 
+        private void RemoveMinKnot(Knot knot,int data)
+        {
+            if (knot.Data == data)
+            {
+
+            }
+        }
+
         private Knot GetKnot(Knot knot, int data)
         {
-            if (knot == null)
-            {
-                return null;
-            }
-            else if (knot.Data == data)
+            if (knot.Data == data)
             {
                 return knot;
             }

@@ -15,6 +15,12 @@ namespace BinaryTree
             binaryTree.AddKnot(11);
             binaryTree.AddKnot(5);
             binaryTree.IsContain(5);
+            binaryTree.AddKnot(2);
+            binaryTree.AddKnot(3);
+            binaryTree.AddKnot(7);
+            binaryTree.AddKnot(9);
+            binaryTree.AddKnot(1);
+            binaryTree.RemoveKnot(6);
         }
     }
 }
