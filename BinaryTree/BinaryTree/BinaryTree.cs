@@ -91,11 +91,12 @@ namespace BinaryTree
             }
             else
             {
-                return ;
+                Knot removeKnot = GetKnot(root, data);
+                RemoveKnot(removeKnot);
             }
         }
 
-        private bool RemoveKnot(Knot knot, int data)
+        private bool RemoveKnot(Knot knot)
         {
             if (knot == null)
             {
@@ -121,7 +122,41 @@ namespace BinaryTree
             }
             else
             {
+                Knot newKnot = GetMinKnot(knot.Right);
+                knot.Data = newKnot.Data;
+                return true;
+            }
+        }
 
+        private Knot GetMinKnot(Knot knot)
+        {
+            if (knot.Left == null)
+            {
+                return knot;
+            }
+            else
+            {
+                return GetMinKnot(knot.Left);
+            }
+        }
+
+        private Knot GetKnot(Knot knot, int data)
+        {
+            if (knot == null)
+            {
+                return null;
+            }
+            else if (knot.Data == data)
+            {
+                return knot;
+            }
+            else if (knot.Data > data)
+            {
+                return GetKnot(knot.Left, data);
+            }
+            else
+            {
+                return GetKnot(knot.Right, data);
             }
         }
     }
