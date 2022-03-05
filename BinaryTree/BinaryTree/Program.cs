@@ -21,6 +21,7 @@ namespace BinaryTree
             binaryTree.AddKnot(9);
             binaryTree.AddKnot(1);
             binaryTree.RemoveKnot(6);
+            binaryTree.RemoveKnot(12);
         }
     }
 }
