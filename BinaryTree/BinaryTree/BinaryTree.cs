@@ -143,10 +143,26 @@ namespace BinaryTree
             }
             else
             {
-                Knot newKnot = GetMinKnot(knot.Right);
-                Knot parentMinKnot = GetParentKnot(knot.Right, newKnot);
-                parentMinKnot.Left = null;
-                knot.Data = newKnot.Data;
+                if (knot.Right.Left == null)
+                {
+                    if (parentKnot.Left == knot)
+                    {
+                        knot.Right.Left = knot.Left;
+                        parentKnot.Left = knot.Right;
+                    }
+                    else
+                    {
+                        knot.Right.Left = knot.Left;
+                        parentKnot.Right = knot.Right;
+                    }
+                }
+                else
+                {
+                    Knot newKnot = GetMinKnot(knot.Right);
+                    Knot parentMinKnot = GetParentKnot(knot.Right, newKnot);
+                    parentMinKnot.Left = null;
+                    knot.Data = newKnot.Data;
+                }
             }
         }
 
