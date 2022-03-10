@@ -104,19 +104,41 @@ namespace BinaryTree
 
         private void RemoveKnot(Knot knot)
         {
+            Knot parentKnot = GetParentKnot(root, knot);
             if (knot.Left == null & knot.Right == null)
             {
-                knot = null;
+                if (parentKnot.Left == knot)
+                {
+                    parentKnot.Left = null;
+                }
+                else
+                {
+                    parentKnot.Right = null;
+                }
             }
             else if (knot.Left == null ^ knot.Right == null)
             {
                 if (knot.Left == null)
                 {
-                    knot = knot.Right;
+                    if (parentKnot.Left == knot)
+                    {
+                        parentKnot.Left = knot.Right;
+                    }
+                    else
+                    {
+                        parentKnot.Right = knot.Right;
+                    }
                 }
                 else
                 {
-                    knot = knot.Left;
+                    if (parentKnot.Left == knot)
+                    {
+                        parentKnot.Left = knot.Left;
+                    }
+                    else
+                    {
+                        parentKnot.Right = knot.Left;
+                    }
                 }
             }
             else
@@ -158,13 +180,17 @@ namespace BinaryTree
 
         private Knot GetParentKnot(Knot currentKnot, Knot knot)
         {
-            if (currentKnot.Left == knot)
+            if (currentKnot.Left == knot ^ currentKnot.Right == knot)
             {
                 return currentKnot;
             }
-            else
+            else if (currentKnot.Data > knot.Data)
             {
                 return GetParentKnot(currentKnot.Left, knot);
+            }
+            else
+            {
+                return GetParentKnot(currentKnot.Right, knot);
             }
         }
     }
