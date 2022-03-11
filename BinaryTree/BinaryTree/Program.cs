@@ -20,9 +20,7 @@ namespace BinaryTree
             binaryTree.AddKnot(7);
             binaryTree.AddKnot(9);
             binaryTree.AddKnot(1);
-            binaryTree.RemoveKnot(6);
-            binaryTree.RemoveKnot(1);
-            binaryTree.RemoveKnot(10);
+            binaryTree.PrintTree();
         }
     }
 }

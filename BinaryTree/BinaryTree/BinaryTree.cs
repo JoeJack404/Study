@@ -241,5 +241,46 @@ namespace BinaryTree
                 return GetParentKnot(currentKnot.Right, knot);
             }
         }
+
+        public void PrintTree()
+        {
+            Knot minKnot = GetMinKnot(root);
+            PrintTree(minKnot);
+        }
+
+        private void PrintTree(Knot knot)
+        {
+            Knot returnKnot = PrintLeftKnot(knot);
+            PrintTree(returnKnot);
+        }
+        private Knot PrintLeftKnot(Knot knot)
+        {
+            Console.WriteLine(knot.Data);
+            if (knot.Right == null)
+            {
+                return GetParentKnot(root, knot);
+            }
+            else
+            {
+                return PrintRightKnot(knot.Right);
+            }
+        }
+
+        private Knot PrintRightKnot(Knot knot)
+        {
+            if (knot.Left != null)
+            {
+                return GetMinKnot(knot.Left);
+            }
+            else if (knot.Right != null)
+            {
+                return PrintRightKnot(knot.Right);
+            }
+            else
+            {
+                Console.WriteLine(knot.Data);
+                return GetParentKnot(root, GetParentKnot(root, knot));
+            }
+        }
     }
 }
