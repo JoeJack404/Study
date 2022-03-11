@@ -89,11 +89,6 @@ namespace BinaryTree
             {
                 return false;
             }
-            else if (root.Data == data)
-            {
-                Console.WriteLine("Удалить корневой элемент нельзя");
-                return false;
-            }
             else
             {
                 Knot removeKnot = GetKnot(root, data);
@@ -104,64 +99,101 @@ namespace BinaryTree
 
         private void RemoveKnot(Knot knot)
         {
-            Knot parentKnot = GetParentKnot(root, knot);
-            if (knot.Left == null & knot.Right == null)
+            if (root == knot)
             {
-                if (parentKnot.Left == knot)
+                if (root.Left == null & root.Right == null)
                 {
-                    parentKnot.Left = null;
+                    root = null;
+                    Console.WriteLine("Дерево пусто");
                 }
-                else
+                else if (root.Left == null ^ root.Right == null)
                 {
-                    parentKnot.Right = null;
-                }
-            }
-            else if (knot.Left == null ^ knot.Right == null)
-            {
-                if (knot.Left == null)
-                {
-                    if (parentKnot.Left == knot)
+                    if (root.Left == null)
                     {
-                        parentKnot.Left = knot.Right;
+                        root = root.Right;
                     }
                     else
                     {
-                        parentKnot.Right = knot.Right;
+                        root = root.Left;
                     }
                 }
                 else
                 {
-                    if (parentKnot.Left == knot)
+                    if (root.Right.Left == null)
                     {
-                        parentKnot.Left = knot.Left;
+                        root.Right.Left = root.Left;
+                        root = root.Right;
                     }
                     else
                     {
-                        parentKnot.Right = knot.Left;
+                        Knot newKnot = GetMinKnot(root.Right);
+                        Knot parentMinKnot = GetParentKnot(root.Right, newKnot);
+                        parentMinKnot.Left = null;
+                        root.Data = newKnot.Data;
                     }
                 }
             }
             else
             {
-                if (knot.Right.Left == null)
+                Knot parentKnot = GetParentKnot(root, knot);
+                if (knot.Left == null & knot.Right == null)
                 {
                     if (parentKnot.Left == knot)
                     {
-                        knot.Right.Left = knot.Left;
-                        parentKnot.Left = knot.Right;
+                        parentKnot.Left = null;
                     }
                     else
                     {
-                        knot.Right.Left = knot.Left;
-                        parentKnot.Right = knot.Right;
+                        parentKnot.Right = null;
+                    }
+                }
+                else if (knot.Left == null ^ knot.Right == null)
+                {
+                    if (knot.Left == null)
+                    {
+                        if (parentKnot.Left == knot)
+                        {
+                            parentKnot.Left = knot.Right;
+                        }
+                        else
+                        {
+                            parentKnot.Right = knot.Right;
+                        }
+                    }
+                    else
+                    {
+                        if (parentKnot.Left == knot)
+                        {
+                            parentKnot.Left = knot.Left;
+                        }
+                        else
+                        {
+                            parentKnot.Right = knot.Left;
+                        }
                     }
                 }
                 else
                 {
-                    Knot newKnot = GetMinKnot(knot.Right);
-                    Knot parentMinKnot = GetParentKnot(knot.Right, newKnot);
-                    parentMinKnot.Left = null;
-                    knot.Data = newKnot.Data;
+                    if (knot.Right.Left == null)
+                    {
+                        if (parentKnot.Left == knot)
+                        {
+                            knot.Right.Left = knot.Left;
+                            parentKnot.Left = knot.Right;
+                        }
+                        else
+                        {
+                            knot.Right.Left = knot.Left;
+                            parentKnot.Right = knot.Right;
+                        }
+                    }
+                    else
+                    {
+                        Knot newKnot = GetMinKnot(knot.Right);
+                        Knot parentMinKnot = GetParentKnot(knot.Right, newKnot);
+                        parentMinKnot.Left = null;
+                        knot.Data = newKnot.Data;
+                    }
                 }
             }
         }
