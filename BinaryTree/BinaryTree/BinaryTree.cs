@@ -266,14 +266,8 @@ namespace BinaryTree
             }
             else
             {
-                if (PrintRightKnot(knot.Right) == null)
-                {
-                    return GetParentKnot(root, GetParentKnot(root, knot));
-                }
-                else
-                {
-                    return PrintRightKnot(knot.Right);
-                }
+                PrintRightKnot(knot.Right);
+                return GetParentKnot(root, knot);
             }
         }
 
@@ -281,10 +275,12 @@ namespace BinaryTree
         {
             if (knot.Left != null)
             {
-                return GetMinKnot(knot.Left);
+                Knot minKnot = GetMinKnot(knot);
+                return PrintLeftKnot(minKnot);
             }
             else if (knot.Right != null)
             {
+                Console.WriteLine(knot.Data);
                 return PrintRightKnot(knot.Right);
             }
             else
