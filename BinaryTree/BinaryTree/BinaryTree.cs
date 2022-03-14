@@ -9,7 +9,10 @@ namespace BinaryTree
     class BinaryTree
     {
         private Knot root;
-
+        /// <summary>
+        /// Добавляет новый узел.
+        /// </summary>
+        /// <param name="data">Значение, которое добавится</param>
         public void AddKnot(int data)
         {
             if (root == null)
@@ -50,7 +53,11 @@ namespace BinaryTree
                 }
             }
         }
-
+        /// <summary>
+        /// Проверяет есть ли такой узел.
+        /// </summary>
+        /// <param name="data">Значение для проверки</param>
+        /// <returns></returns>
         public bool IsContain(int data)
         {
             return root == null ? false : IsContain(root, data);
@@ -75,18 +82,20 @@ namespace BinaryTree
                 return IsContain(knot.Right, data);
             }
         }
-
-        public bool RemoveKnot(int data)
+        /// <summary>
+        /// Удаляет узел
+        /// </summary>
+        /// <param name="data">Значение в узле</param>
+        public void RemoveKnot(int data)
         {
             if (!IsContain(root, data))
             {
-                return false;
+                Console.WriteLine("Такого узла нет");
             }
             else
             {
-                Knot removeKnot = GetKnot(root, data);
+                Knot removeKnot = GetKnotByValue(root, data);
                 RemoveKnot(removeKnot);
-                return true;
             }
         }
 
@@ -190,13 +199,22 @@ namespace BinaryTree
                 }
             }
         }
-
+        /// <summary>
+        /// Возвращет  самого левого наследника
+        /// </summary>
+        /// <param name="knot">Узел</param>
+        /// <returns>Самый левый наследник</returns>
         private Knot GetMinKnot(Knot knot)
         {
             return knot.Left == null ? knot : GetMinKnot(knot.Left);
         }
-
-        private Knot GetKnot(Knot knot, int data)
+        /// <summary>
+        /// Находит узел по значению
+        /// </summary>
+        /// <param name="knot">Узел, с которого начинается поиск</param>
+        /// <param name="data">Значение в узле</param>
+        /// <returns>Узел с заданным значение</returns>
+        private Knot GetKnotByValue(Knot knot, int data)
         {
             if (knot.Data == data)
             {
@@ -204,14 +222,19 @@ namespace BinaryTree
             }
             else if (knot.Data > data)
             {
-                return GetKnot(knot.Left, data);
+                return GetKnotByValue(knot.Left, data);
             }
             else
             {
-                return GetKnot(knot.Right, data);
+                return GetKnotByValue(knot.Right, data);
             }
         }
-
+        /// <summary>
+        /// Возвращет "родителя" узла
+        /// </summary>
+        /// <param name="currentKnot">Узел, с которого начинается поиск</param>
+        /// <param name="knot">Узел, для которого ищется родитель</param>
+        /// <returns>"Родитель"</returns>
         private Knot GetParentKnot(Knot currentKnot, Knot knot)
         {
             if (currentKnot.Left == knot ^ currentKnot.Right == knot)
@@ -231,7 +254,9 @@ namespace BinaryTree
                 return GetParentKnot(currentKnot.Right, knot);
             }
         }
-
+        /// <summary>
+        /// Печатает содержимое дерева по возрастанию.
+        /// </summary>
         public void PrintTree()
         {
             Knot minKnot = GetMinKnot(root);
@@ -246,6 +271,11 @@ namespace BinaryTree
                 PrintTree(returnKnot);
             }
         }
+        /// <summary>
+        /// Печаетает левых наследников узла.
+        /// </summary>
+        /// <param name="knot"></param>
+        /// <returns></returns>
         private Knot PrintLeftKnot(Knot knot)
         {
             Console.WriteLine(knot.Data);
@@ -259,7 +289,10 @@ namespace BinaryTree
                 return GetParentKnot(root, knot);
             }
         }
-
+        /// <summary>
+        /// Печатает правых наследников узла.
+        /// </summary>
+        /// <param name="knot"></param>
         private void PrintRightKnot(Knot knot)
         {
             if (knot.Left != null & knot.Right == null)
