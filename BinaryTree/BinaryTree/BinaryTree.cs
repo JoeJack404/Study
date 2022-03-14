@@ -83,7 +83,7 @@ namespace BinaryTree
             }
         }
         /// <summary>
-        /// Удаляет узел
+        /// Удаляет узел.
         /// </summary>
         /// <param name="data">Значение в узле</param>
         public void RemoveKnot(int data)
@@ -285,21 +285,30 @@ namespace BinaryTree
             }
             else
             {
-                PrintRightKnot(knot.Right);
-                return GetParentKnot(root, knot);
+                Knot returnKnot = PrintRightKnot(knot.Right);
+                //if (returnKnot == null)
+                //{
+                //    return GetParentKnot(root, knot);
+                //}
+                //else
+                //{
+                //    PrintLeftKnot(GetParentKnot(root, returnKnot));
+                //    return GetParentKnot(root, knot);
+                }
             }
         }
         /// <summary>
         /// Печатает правых наследников узла.
         /// </summary>
         /// <param name="knot"></param>
-        private void PrintRightKnot(Knot knot)
+        private Knot PrintRightKnot(Knot knot)
         {
             if (knot.Left != null & knot.Right == null)
             {
                 Knot minKnot = GetMinKnot(knot);
-                PrintLeftKnot(minKnot);
+                Knot returnKnot = PrintLeftKnot(minKnot);
                 Console.WriteLine(knot.Data);
+                return returnKnot;
             }
             else if (knot.Left != null & knot.Right != null)
             {
@@ -307,15 +316,18 @@ namespace BinaryTree
                 PrintLeftKnot(minKnot);
                 Console.WriteLine(knot.Data);
                 PrintRightKnot(knot.Right);
+                return null;
             }
             else if (knot.Right != null)
             {
                 Console.WriteLine(knot.Data);
                 PrintRightKnot(knot.Right);
+                return null;
             }
             else
             {
                 Console.WriteLine(knot.Data);
+                return null;
             }
         }
     }

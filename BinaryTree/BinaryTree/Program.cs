@@ -27,12 +27,12 @@ namespace BinaryTree
             binaryTree.AddKnot(17);
             binaryTree.AddKnot(18);
             binaryTree.AddKnot(40);
-            binaryTree.AddKnot(19);
-            binaryTree.AddKnot(20);
-            binaryTree.AddKnot(21);
-            binaryTree.AddKnot(22);
-            binaryTree.AddKnot(23);
             binaryTree.AddKnot(24);
+            binaryTree.AddKnot(23);
+            binaryTree.AddKnot(22);
+            binaryTree.AddKnot(21);
+            binaryTree.AddKnot(20);
+            binaryTree.AddKnot(19);
             binaryTree.PrintTree();
         }
     }
