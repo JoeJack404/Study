@@ -53,14 +53,7 @@ namespace BinaryTree
 
         public bool IsContain(int data)
         {
-            if (root == null)
-            {
-                return false;
-            }
-            else
-            {
-                return IsContain(root, data);
-            }
+            return root == null ? false : IsContain(root, data);
         }
 
         private bool IsContain(Knot knot, int data)
@@ -200,14 +193,7 @@ namespace BinaryTree
 
         private Knot GetMinKnot(Knot knot)
         {
-            if (knot.Left == null)
-            {
-                return knot;
-            }
-            else
-            {
-                return GetMinKnot(knot.Left);
-            }
+            return knot.Left == null ? knot : GetMinKnot(knot.Left);
         }
 
         private Knot GetKnot(Knot knot, int data)
@@ -238,7 +224,7 @@ namespace BinaryTree
             }
             else if (currentKnot == knot)
             {
-                return root;
+                return null;
             }
             else
             {
@@ -255,7 +241,10 @@ namespace BinaryTree
         private void PrintTree(Knot knot)
         {
             Knot returnKnot = PrintLeftKnot(knot);
-            PrintTree(returnKnot);
+            if (returnKnot != null)
+            {
+                PrintTree(returnKnot);
+            }
         }
         private Knot PrintLeftKnot(Knot knot)
         {
@@ -271,22 +260,24 @@ namespace BinaryTree
             }
         }
 
-        private Knot PrintRightKnot(Knot knot)
+        private void PrintRightKnot(Knot knot)
         {
-            if (knot.Left != null)
+            if (knot.Left != null & knot.Right == null)
             {
                 Knot minKnot = GetMinKnot(knot);
-                return PrintLeftKnot(minKnot);
+                PrintLeftKnot(minKnot);
+                Console.WriteLine(knot.Data);
             }
             else if (knot.Right != null)
             {
+                //Knot minKnot = GetMinKnot(knot);
+                //PrintLeftKnot(minKnot);
                 Console.WriteLine(knot.Data);
-                return PrintRightKnot(knot.Right);
+                PrintRightKnot(knot.Right);
             }
             else
             {
                 Console.WriteLine(knot.Data);
-                return null;
             }
         }
     }
