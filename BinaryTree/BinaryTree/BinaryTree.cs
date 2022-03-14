@@ -268,10 +268,15 @@ namespace BinaryTree
                 PrintLeftKnot(minKnot);
                 Console.WriteLine(knot.Data);
             }
+            else if (knot.Left != null & knot.Right != null)
+            {
+                Knot minKnot = GetMinKnot(knot);
+                PrintLeftKnot(minKnot);
+                Console.WriteLine(knot.Data);
+                PrintRightKnot(knot.Right);
+            }
             else if (knot.Right != null)
             {
-                //Knot minKnot = GetMinKnot(knot);
-                //PrintLeftKnot(minKnot);
                 Console.WriteLine(knot.Data);
                 PrintRightKnot(knot.Right);
             }
