@@ -271,11 +271,58 @@ namespace BinaryTree
                 PrintTree(returnKnot);
             }
         }
-        /// <summary>
-        /// Печаетает левых наследников узла.
-        /// </summary>
-        /// <param name="knot"></param>
-        /// <returns></returns>
+
+        //private Knot PrintLeftKnot(Knot knot)
+        //{
+        //    Console.WriteLine(knot.Data);
+        //    if (knot.Right == null)
+        //    {
+        //        return GetParentKnot(root, knot);
+        //    }
+        //    else
+        //    {
+        //        Knot returnKnot = PrintRightKnot(knot.Right);
+        //        if (returnKnot == null)
+        //        {
+        //            return GetParentKnot(root, knot);
+        //        }
+        //        else
+        //        {
+        //            PrintTree(returnKnot);
+        //            return GetParentKnot(root, returnKnot);
+        //        }
+        //    }
+        //}
+
+        //private Knot PrintRightKnot(Knot knot)
+        //{
+        //    if (knot.Left != null & knot.Right == null)
+        //    {
+        //        Knot minKnot = GetMinKnot(knot);
+        //        /*Knot returnKnot =*/ PrintTree(minKnot);
+        //        //Console.WriteLine(knot.Data);
+        //        return null;
+        //    }
+        //    else if (knot.Left != null & knot.Right != null)
+        //    {
+        //        Knot minKnot = GetMinKnot(knot);
+        //        PrintLeftKnot(minKnot);
+        //        Console.WriteLine(knot.Data);
+        //        Knot newKnot = PrintRightKnot(knot.Right);
+        //        return newKnot;
+        //    }
+        //    else if (knot.Left == null & knot.Right != null)
+        //    {
+        //        Console.WriteLine(knot.Data);
+        //        Knot newKnot = PrintRightKnot(knot.Right);
+        //        return newKnot;
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine(knot.Data);
+        //        return null;
+        //    }
+        //}
         private Knot PrintLeftKnot(Knot knot)
         {
             Console.WriteLine(knot.Data);
@@ -285,49 +332,31 @@ namespace BinaryTree
             }
             else
             {
-                Knot returnKnot = PrintRightKnot(knot.Right);
-                //if (returnKnot == null)
-                //{
-                //    return GetParentKnot(root, knot);
-                //}
-                //else
-                //{
-                //    PrintLeftKnot(GetParentKnot(root, returnKnot));
-                //    return GetParentKnot(root, knot);
-                }
+                PrintRightKnot(knot.Right);
+                return GetParentKnot(root, knot);
             }
         }
-        /// <summary>
-        /// Печатает правых наследников узла.
-        /// </summary>
-        /// <param name="knot"></param>
-        private Knot PrintRightKnot(Knot knot)
+        
+        private void PrintRightKnot(Knot knot)
         {
-            if (knot.Left != null & knot.Right == null)
+            if(knot.Left != null & knot.Right == null)
             {
-                Knot minKnot = GetMinKnot(knot);
-                Knot returnKnot = PrintLeftKnot(minKnot);
-                Console.WriteLine(knot.Data);
-                return returnKnot;
+                PrintLeftKnot(GetMinKnot(knot));
             }
-            else if (knot.Left != null & knot.Right != null)
+            else if (knot.Right != null & knot.Left == null)
             {
-                Knot minKnot = GetMinKnot(knot);
-                PrintLeftKnot(minKnot);
                 Console.WriteLine(knot.Data);
-                PrintRightKnot(knot.Right);
-                return null;
+                PrintLeftKnot(GetMinKnot(knot.Right));
             }
-            else if (knot.Right != null)
+            else if (knot.Right != null & knot.Right != null)
             {
+                PrintLeftKnot(GetMinKnot(knot));
                 Console.WriteLine(knot.Data);
-                PrintRightKnot(knot.Right);
-                return null;
+                PrintLeftKnot(GetMinKnot(knot.Right));
             }
             else
             {
                 Console.WriteLine(knot.Data);
-                return null;
             }
         }
     }
