@@ -348,7 +348,7 @@ namespace BinaryTree
                 Console.WriteLine(knot.Data);
                 PrintLeftKnot(GetMinKnot(knot.Right));
             }
-            else if (knot.Right != null & knot.Right != null)
+            else if (knot.Right != null & knot.Left != null)
             {
                 PrintLeftKnot(GetMinKnot(knot));
                 Console.WriteLine(knot.Data);
