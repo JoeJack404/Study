@@ -33,7 +33,8 @@ namespace BinaryTree
             binaryTree.AddKnot(21);
             binaryTree.AddKnot(20);
             binaryTree.AddKnot(19);
-            binaryTree.PrintTree();
+            binaryTree.PrintAscending();
+            binaryTree.PrintDescending();
         }
     }
 }
