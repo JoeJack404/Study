@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    class BinaryTree
+    public class Tree
     {
-        private Knot root;
+        public Knot root;
         /// <summary>
         /// Добавляет новый узел.
         /// </summary>
@@ -26,7 +26,7 @@ namespace BinaryTree
             }
         }
 
-        private void AddKnot(Knot knot, int data)
+        public void AddKnot(Knot knot, int data)
         {
             if (knot.Data > data)
             {
@@ -63,7 +63,7 @@ namespace BinaryTree
             return root == null ? false : IsContain(root, data);
         }
 
-        private bool IsContain(Knot knot, int data)
+        public bool IsContain(Knot knot, int data)
         {
             if (knot == null)
             {
@@ -99,7 +99,7 @@ namespace BinaryTree
             }
         }
 
-        private void RemoveKnot(Knot knot)
+        public void RemoveKnot(Knot knot)
         {
             if (root == knot)
             {
@@ -204,7 +204,7 @@ namespace BinaryTree
         /// </summary>
         /// <param name="knot">Узел</param>
         /// <returns>Узел.</returns>
-        private Knot GetMinKnot(Knot knot)
+        public Knot GetMinKnot(Knot knot)
         {
             return knot.Left == null ? knot : GetMinKnot(knot.Left);
         }
@@ -214,19 +214,26 @@ namespace BinaryTree
         /// <param name="knot">Узел, с которого начинается поиск.</param>
         /// <param name="data">Значение в узле.</param>
         /// <returns>Узел.</returns>
-        private Knot GetKnotByValue(Knot knot, int data)
+        public Knot GetKnotByValue(Knot knot, int data)
         {
-            if (knot.Data == data)
+            if (IsContain(data))
             {
-                return knot;
-            }
-            else if (knot.Data > data)
-            {
-                return GetKnotByValue(knot.Left, data);
+                if (knot.Data == data)
+                {
+                    return knot;
+                }
+                else if (knot.Data > data)
+                {
+                    return GetKnotByValue(knot.Left, data);
+                }
+                else
+                {
+                    return GetKnotByValue(knot.Right, data);
+                }
             }
             else
             {
-                return GetKnotByValue(knot.Right, data);
+                return null;
             }
         }
         /// <summary>
@@ -235,7 +242,7 @@ namespace BinaryTree
         /// <param name="currentKnot">Узел, с которого начинается поиск</param>
         /// <param name="knot">Узел</param>
         /// <returns>"Родитель"</returns>
-        private Knot GetParentKnot(Knot currentKnot, Knot knot)
+        public Knot GetParentKnot(Knot currentKnot, Knot knot)
         {
             if (currentKnot.Left == knot ^ currentKnot.Right == knot)
             {
@@ -262,7 +269,7 @@ namespace BinaryTree
             PrintAscending(root);
         }
 
-        private void PrintAscending(Knot knot)
+        public void PrintAscending(Knot knot)
         {
             if (knot.Left != null)
             {
@@ -282,7 +289,7 @@ namespace BinaryTree
             PrintDescending(root);
         }
 
-        private void PrintDescending(Knot knot)
+        public void PrintDescending(Knot knot)
         {
             if (knot.Right != null)
             {

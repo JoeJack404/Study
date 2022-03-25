@@ -6,7 +6,7 @@ namespace BinaryTree
     {
         static void Main(string[] args)
         {
-            BinaryTree binaryTree = new BinaryTree();
+            Tree binaryTree = new Tree();
             binaryTree.AddKnot(10);
             binaryTree.AddKnot(6);
             binaryTree.AddKnot(8);
