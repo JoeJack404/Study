@@ -264,41 +264,57 @@ namespace BinaryTree
         /// <summary>
         /// Печать содержимого дерева по возрастанию.
         /// </summary>
-        public void PrintAscending()
+        public string PrintAscending()
         {
-            PrintAscending(root);
+            List<int> knots = new List<int>();
+            PrintAscending(root, knots);
+            string forTestString = null;
+            foreach (int knotData in knots)
+            {
+                Console.Write(knotData);
+                forTestString = forTestString + Convert.ToString(knotData);
+            }
+            return forTestString;
         }
 
-        public void PrintAscending(Knot knot)
+        public void PrintAscending(Knot knot, List<int> knots)
         {
             if (knot.Left != null)
             {
-                PrintAscending(knot.Left);
+                PrintAscending(knot.Left, knots);
             }
-            Console.Write(knot.Data + " ");
+            knots.Add(knot.Data);
             if (knot.Right != null)
             {
-                PrintAscending(knot.Right);
+                PrintAscending(knot.Right, knots);
             }
         }
         /// <summary>
         /// Печать содержимого дерева по убыванию.
         /// </summary>
-        public void PrintDescending()
+        public string PrintDescending()
         {
-            PrintDescending(root);
+            List<int> knots = new List<int>();
+            PrintDescending(root, knots);
+            string forTestString = null;
+            foreach (int knotData in knots)
+            {
+                Console.Write(knotData);
+                forTestString = forTestString + Convert.ToString(knotData);
+            }
+            return forTestString;
         }
 
-        public void PrintDescending(Knot knot)
+        public void PrintDescending(Knot knot, List<int> knots)
         {
             if (knot.Right != null)
             {
-                PrintDescending(knot.Right);
+                PrintDescending(knot.Right, knots);
             }
-            Console.Write(knot.Data + " ");
+            knots.Add(knot.Data);
             if (knot.Left != null)
             {
-                PrintDescending(knot.Left);
+                PrintDescending(knot.Left, knots);
             }
         }
     }
