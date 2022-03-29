@@ -9,6 +9,7 @@ namespace BinaryTree
     public class Tree<T> where T : IComparable<T>
     {
         public Knot<T> root;
+
         /// <summary>
         /// Добавляет новый узел.
         /// </summary>
@@ -53,6 +54,7 @@ namespace BinaryTree
                 }
             }
         }
+
         /// <summary>
         /// Проверяет есть ли такой узел.
         /// </summary>
@@ -82,6 +84,7 @@ namespace BinaryTree
                 return IsContain(knot.Right, data);
             }
         }
+
         /// <summary>
         /// Удаляет узел.
         /// </summary>
@@ -199,6 +202,7 @@ namespace BinaryTree
                 }
             }
         }
+
         /// <summary>
         /// Возвращет  самого левого наследника.
         /// </summary>
@@ -208,6 +212,7 @@ namespace BinaryTree
         {
             return knot.Left == null ? knot : GetMinKnot(knot.Left);
         }
+
         /// <summary>
         /// Находит узел по значению
         /// </summary>
@@ -236,6 +241,7 @@ namespace BinaryTree
                 return null;
             }
         }
+
         /// <summary>
         /// Возвращет "родителя" узла.
         /// </summary>
@@ -261,6 +267,7 @@ namespace BinaryTree
                 return GetParentKnot(currentKnot.Right, knot);
             }
         }
+
         /// <summary>
         /// Печать содержимого дерева по возрастанию.
         /// </summary>
@@ -271,9 +278,10 @@ namespace BinaryTree
             string forTestString = null;
             foreach (T knotData in knots)
             {
-                Console.Write(knotData);
+                Console.Write(knotData + " ");
                 forTestString = forTestString + Convert.ToString(knotData);
             }
+            Console.WriteLine();
             return forTestString;
         }
 
@@ -289,6 +297,7 @@ namespace BinaryTree
                 PrintAscending(knot.Right, knots);
             }
         }
+
         /// <summary>
         /// Печать содержимого дерева по убыванию.
         /// </summary>
@@ -299,9 +308,10 @@ namespace BinaryTree
             string forTestString = null;
             foreach (T knotData in knots)
             {
-                Console.Write(knotData);
+                Console.Write(knotData + " ");
                 forTestString = forTestString + Convert.ToString(knotData);
             }
+            Console.WriteLine();
             return forTestString;
         }
 
