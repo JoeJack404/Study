@@ -13,7 +13,7 @@ namespace BinaryTree.Tests
         [Test]
         public void AddKnotTest()
         {
-            Tree binaryTree = new Tree();
+            Tree<int> binaryTree = new Tree<int>();
             binaryTree.AddKnot(10);
             Assert.AreEqual(10, binaryTree.root.Data);
             binaryTree.AddKnot(24);
@@ -25,7 +25,7 @@ namespace BinaryTree.Tests
         [Test]
         public void IsContainTest()
         {
-            Tree tree = new Tree();
+            Tree<int> tree = new Tree<int>();
             tree.AddKnot(10);
             tree.AddKnot(6);
             tree.AddKnot(8);
@@ -39,56 +39,56 @@ namespace BinaryTree.Tests
         [Test]
         public void GetMinKnotTest()
         {
-            Tree tree = new Tree();
+            Tree<int> tree = new Tree<int>();
             tree.AddKnot(10);
             tree.AddKnot(6);
             tree.AddKnot(8);
             tree.AddKnot(4);
             tree.AddKnot(12);
-            Knot actualKnot = tree.GetMinKnot(tree.root);
+            Knot<int> actualKnot = tree.GetMinKnot(tree.root);
             Assert.AreEqual(4, actualKnot.Data);
-            Knot actualKnotTwo = tree.GetMinKnot(tree.root.Right);
+            Knot<int> actualKnotTwo = tree.GetMinKnot(tree.root.Right);
             Assert.AreEqual(12, actualKnotTwo.Data);
         }
 
         [Test]
         public void GetKnotByValueTest()
         {
-            Tree tree = new Tree();
+            Tree<int> tree = new Tree<int>();
             tree.AddKnot(10);
             tree.AddKnot(6);
             tree.AddKnot(8);
             tree.AddKnot(4);
             tree.AddKnot(12);
-            Knot actualKnot = tree.GetKnotByValue(tree.root, 8);
+            Knot<int> actualKnot = tree.GetKnotByValue(tree.root, 8);
             Assert.AreEqual(tree.root.Left.Right, actualKnot);
-            Knot actualKnotTwo = tree.GetKnotByValue(tree.root, 12);
+            Knot<int> actualKnotTwo = tree.GetKnotByValue(tree.root, 12);
             Assert.AreEqual(tree.root.Right, actualKnotTwo);
-            Knot nullKnot = tree.GetKnotByValue(tree.root, 9);
+            Knot<int> nullKnot = tree.GetKnotByValue(tree.root, 9);
             Assert.AreEqual(null, nullKnot);
         }
 
         [Test]
         public void GetParentKnotTest()
         {
-            Tree tree = new Tree();
+            Tree<int> tree = new Tree<int>();
             tree.AddKnot(10);
             tree.AddKnot(6);
             tree.AddKnot(8);
             tree.AddKnot(4);
             tree.AddKnot(12);
-            Knot actualKnot = tree.GetParentKnot(tree.root, tree.root.Left.Left);
+            Knot<int> actualKnot = tree.GetParentKnot(tree.root, tree.root.Left.Left);
             Assert.AreEqual(tree.root.Left, actualKnot);
-            Knot actualKnotTwo = tree.GetParentKnot(tree.root, tree.root.Right);
+            Knot<int> actualKnotTwo = tree.GetParentKnot(tree.root, tree.root.Right);
             Assert.AreEqual(tree.root, actualKnotTwo);
-            Knot nullKnot = tree.GetParentKnot(tree.root, tree.root);
+            Knot<int> nullKnot = tree.GetParentKnot(tree.root, tree.root);
             Assert.AreEqual(null, nullKnot);
         }
         
         [Test]
         public void PrintAscendingTest()
         {
-            Tree tree = new Tree();
+            Tree<int> tree = new Tree<int>();
             tree.AddKnot(10);
             tree.AddKnot(6);
             tree.AddKnot(8);
@@ -126,7 +126,7 @@ namespace BinaryTree.Tests
         [Test]
         public void PrintDescendingTest()
         {
-            Tree tree = new Tree();
+            Tree<int> tree = new Tree<int>();
             tree.AddKnot(10);
             tree.AddKnot(6);
             tree.AddKnot(8);

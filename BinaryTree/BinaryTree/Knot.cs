@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BinaryTree
 {
-    public class Knot
+    public class Knot<T> where T : IComparable<T>
     {
-        public int Data { get; set; }
-        public Knot Left { get; set; }
-        public Knot Right { get; set; }
+        public T Data { get; set; }
+        public Knot<T> Left { get; set; }
+        public Knot<T> Right { get; set; }
     }
 }
