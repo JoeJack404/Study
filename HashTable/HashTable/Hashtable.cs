@@ -23,71 +23,11 @@ namespace HashTable
             return Convert.ToInt32(result);
         }
 
-        //public bool TryAdd(string value)  // TryAdd
-        //{
-        //    int position = currentHashFunction(value, table.Length);
-        //    if (table[position] == null)
-        //    {
-        //        table[position] = value;
-        //        return true;
-        //    }
-        //    else if (table[position] == value)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        string[] newTable = new string[table.Length];
-        //        Array.Copy(table, newTable, table.Length);
-        //        Array.Clear(table, 0, table.Length);
-        //        Array.Resize(ref table, table.Length * 3);
-        //        foreach (string oldValue in newTable)
-        //        {
-        //            if (oldValue == null)
-        //            {
-        //            }
-        //            else
-        //            {
-        //                int newPosition = currentHashFunction(oldValue, table.Length * 3);
-        //                table[newPosition] = oldValue;
-        //            }
-        //        }
-        //        TryAdd(value);
-        //        return true;
-        //    }
-        //}
-
-        //public bool IsContain(string value)   //IsContain
-        //{
-        //    int position = currentHashFunction(value, table.Length);
-        //    return table[position] == value;
-        //}
-
-        //public bool RemoveContain(string value)
-        //{
-        //    int position = currentHashFunction(value, table.Length);
-        //    if (table[position] == value)
-        //    {
-        //        Array.Clear(table, position, 1);
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        return false;
-        //    }
-        //}
-        //private bool IsNullCheck(int position)
-        //{
-        //    if (table[position] == null)
-        //    {
-        //        return false;
-        //    }
-        //    else
-        //    {
-        //        return true;
-        //    }
-        //}
-
+        /// <summary>
+        /// Добавление строчки.
+        /// </summary>
+        /// <param name="value">Строчка.</param>
+        /// <returns>True - запись успешно добавлена, false - такая запись уже есть.</returns>
         public bool TryAdd(string value)
         {
             int position = currentHashFunction(value, table.Length);
@@ -108,12 +48,22 @@ namespace HashTable
             }
         }
 
+        /// <summary>
+        /// Проверяет есть ли такая строчка.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>True - строчка есть, false - данной записи нет.</returns>
         public bool IsContain(string value)
         {
             int position = currentHashFunction(value, table.Length);
             return table[position] == null ? false : table[position].Contains(value);
         }
 
+        /// <summary>
+        /// Удаляет запись.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>True - запись удалена, false - такой записи нет.</returns>
         public bool TryRemove(string value)
         {
             int position = currentHashFunction(value, table.Length);
@@ -135,6 +85,10 @@ namespace HashTable
             }
         }
         
+        /// <summary>
+        /// Меняет хэш-функцию.
+        /// </summary>
+        /// <param name="hashFunction">Хэш-фукнция, принимает строчку и размез таблицы, возвращет число.</param>
         public void ChangeHashFunction(HashFunction hashFunction)
         {
             currentHashFunction = hashFunction;
