@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace PhoneBook
 {
@@ -11,15 +12,15 @@ namespace PhoneBook
 			ConsoleOutput.WriteGreeting();
 			int userchoice = -1;
 			while (userchoice != 0)
-			{                                                                //Взаимодействие с пользователем
+			{                                                                
 				ConsoleOutput.WriteChoice();
 				userchoice = Convert.ToInt32(Console.ReadLine());
 				switch (userchoice)
 				{
 					case 1:
-						phoneBook.PrintRecords();                           //Печать содержимого                                                                                                                
+						phoneBook.PrintRecords();                                                                                                                                           
 						break;
-					case 2:                                                 //Добавление абонента
+					case 2:                                                 
 						Console.WriteLine("Введите имя абонента");
 						string name = Console.ReadLine();
 						Console.WriteLine("Введите номер абонента");
@@ -28,12 +29,12 @@ namespace PhoneBook
 						phoneBook.Add(newRecord);
 						Console.WriteLine("Абонент имя: {0} номер: {1} успешно добавлен!", name, number);
 						break;
-					case 3:                                                       //Очистка книги
+					case 3:                                                       
 						phoneBook.Clear();
 						Console.WriteLine("Телефонная книга успешно очищена");
 						break;
 					case 4:
-						Console.WriteLine("Введите имя или номер абонента");          //Поиск абонента
+						Console.WriteLine("Введите имя или номер абонента");          
 						string nameOrNumber = Console.ReadLine();
 						if (int.TryParse(nameOrNumber, out number))
 						{
@@ -63,7 +64,7 @@ namespace PhoneBook
 						}
 						break;
 					case 5:
-						Console.WriteLine("Введите имя абонента");                          //поиск конкретного абонента
+						Console.WriteLine("Введите имя абонента");                          
 						name = Console.ReadLine();
 						Console.WriteLine("Введите номер абонента");
 						number = Convert.ToInt32(Console.ReadLine());
@@ -75,7 +76,7 @@ namespace PhoneBook
 						}
 						Console.WriteLine("Абонент {0} номер {1} успешно найден", record.Name, record.Number);
 						break;
-					case 6:                                                                       //удаление абонента
+					case 6:                                                                       
 						Console.WriteLine("Введите имя или номер абонент");
 						string numberOrName = Console.ReadLine();
 						if (int.TryParse(numberOrName, out number))
@@ -106,6 +107,9 @@ namespace PhoneBook
 								Console.WriteLine("Абонент имя {0} номер {1} успешно удален!", recordnumberremove.Name, recordnumberremove.Number);
 							}
 						}
+						break;
+					case 7:
+						phoneBook.WriteFile();
 						break;
 					case 0:
 						break;
