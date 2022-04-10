@@ -92,11 +92,11 @@ namespace PhoneBook
             {
                 foreach (PhoneBookRecord recordPhoneBook in phoneBookRecords)
                 {
-                    byte[] recordNameByte = System.Text.Encoding.Default.GetBytes(recordPhoneBook.Name);
+                    byte[] recordNameByte = Encoding.Default.GetBytes(recordPhoneBook.Name);
                     string stringNumber = recordPhoneBook.Number.ToString();
-                    byte[] recordNumberByte = System.Text.Encoding.Default.GetBytes(stringNumber);
-                    byte[] breakLine = System.Text.Encoding.Default.GetBytes("\n");
-                    byte[] space = System.Text.Encoding.Default.GetBytes(" ");
+                    byte[] recordNumberByte = Encoding.Default.GetBytes(stringNumber);
+                    byte[] breakLine = Encoding.Default.GetBytes("\n");
+                    byte[] space = Encoding.Default.GetBytes(" ");
                     phoneBookFile.Write(recordNameByte);
                     phoneBookFile.Write(space);
                     phoneBookFile.Write(recordNumberByte);
