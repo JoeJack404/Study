@@ -95,12 +95,12 @@ namespace PhoneBook
                     byte[] recordNameByte = System.Text.Encoding.Default.GetBytes(recordPhoneBook.Name);
                     string stringNumber = recordPhoneBook.Number.ToString();
                     byte[] recordNumberByte = System.Text.Encoding.Default.GetBytes(stringNumber);
-                    byte[] n = System.Text.Encoding.Default.GetBytes("\n");
-                    byte[] b = System.Text.Encoding.Default.GetBytes(" ");
+                    byte[] breakLine = System.Text.Encoding.Default.GetBytes("\n");
+                    byte[] space = System.Text.Encoding.Default.GetBytes(" ");
                     phoneBookFile.Write(recordNameByte);
-                    phoneBookFile.Write(b);
+                    phoneBookFile.Write(space);
                     phoneBookFile.Write(recordNumberByte);
-                    phoneBookFile.Write(n);
+                    phoneBookFile.Write(breakLine);
                 }
             }
         }
