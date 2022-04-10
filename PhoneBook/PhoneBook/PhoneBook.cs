@@ -7,86 +7,86 @@ using System.IO;
 
 namespace PhoneBook
 {
-	class PhoneBook
+    class PhoneBook
     {
-		private List<PhoneBookRecord> phoneBookRecords = new List<PhoneBookRecord>();
-		public int Size { get; private set; } = 0;
+        private List<PhoneBookRecord> phoneBookRecords = new List<PhoneBookRecord>();
+        public int Size { get; private set; } = 0;
 
-		/// <summary>
-		/// Добавлениенового абонента.
-		/// </summary>
-		/// <param name="phoneBookRecord"></param>
-		public void Add(PhoneBookRecord phoneBookRecord)                            
-		{
-			phoneBookRecords.Add(phoneBookRecord);
-			++Size;
-		}
-
-		/// <summary>
-		/// Печать содержимого.
-		/// </summary>
-		public void PrintRecords()                                          
-		{
-			foreach (PhoneBookRecord record in phoneBookRecords)
-			{
-				Console.WriteLine("Имя: {0} Номер телефона: {1}", record.Name, record.Number);
-			}
-			if (phoneBookRecords.Count == 0)
-				Console.WriteLine("Телефонная книга пуста");
-		}
-
-		/// <summary>
-		/// Поиск абонента.
-		/// </summary>
-		/// <param name="number">Номер абонента</param>
-		/// <returns></returns>
-		public PhoneBookRecord FindRecord(int number)                     
-		{
-			return phoneBookRecords.Find(phoneBookRecords => phoneBookRecords.Number == number);
-		}
-
-		/// <summary>
-		/// Поиск конкретного абонента.
-		/// </summary>
-		/// <param name="number">Номер.</param>
-		/// <param name="name">Имя.</param>
-		/// <returns></returns>
-		public PhoneBookRecord FindRecord(int number, string name)        
-		{
-			return phoneBookRecords.Find(phoneBookRecords => phoneBookRecords.Name == name & phoneBookRecords.Number == number);
-		}
-
-		/// <summary>
-		/// Поиск абонента.
-		/// </summary>
-		/// <param name="name">Имя.</param>
-		/// <returns></returns>
-		public PhoneBookRecord FindRecord(string name)                  
-		{
-			return phoneBookRecords.Find(phoneBookRecords => phoneBookRecords.Name == name);
-		}
-
-		/// <summary>
-		/// Очистка телефонной книги.
-		/// </summary>
-		public void Clear()                      
-		{
-			phoneBookRecords.Clear();
-		}
-
-		/// <summary>
-		/// Удаление абонента.
-		/// </summary>
-		/// <param name="record"></param>
-		public void Remove(PhoneBookRecord record)     
+        /// <summary>
+        /// Добавлениенового абонента.
+        /// </summary>
+        /// <param name="phoneBookRecord"></param>
+        public void Add(PhoneBookRecord phoneBookRecord)
         {
-			phoneBookRecords.Remove(record);
+            phoneBookRecords.Add(phoneBookRecord);
+            ++Size;
         }
 
-		/// <summary>
-		/// Запись телефонной книги в файл.
-		/// </summary>
-		public void WriteFile()
+        /// <summary>
+        /// Печать содержимого.
+        /// </summary>
+        public void PrintRecords()
+        {
+            foreach (PhoneBookRecord record in phoneBookRecords)
+            {
+                Console.WriteLine("Имя: {0} Номер телефона: {1}", record.Name, record.Number);
+            }
+            if (phoneBookRecords.Count == 0)
+                Console.WriteLine("Телефонная книга пуста");
+        }
+
+        /// <summary>
+        /// Поиск абонента.
+        /// </summary>
+        /// <param name="number">Номер абонента</param>
+        /// <returns></returns>
+        public PhoneBookRecord FindRecord(int number)
+        {
+            return phoneBookRecords.Find(phoneBookRecords => phoneBookRecords.Number == number);
+        }
+
+        /// <summary>
+        /// Поиск конкретного абонента.
+        /// </summary>
+        /// <param name="number">Номер.</param>
+        /// <param name="name">Имя.</param>
+        /// <returns></returns>
+        public PhoneBookRecord FindRecord(int number, string name)
+        {
+            return phoneBookRecords.Find(phoneBookRecords => phoneBookRecords.Name == name & phoneBookRecords.Number == number);
+        }
+
+        /// <summary>
+        /// Поиск абонента.
+        /// </summary>
+        /// <param name="name">Имя.</param>
+        /// <returns></returns>
+        public PhoneBookRecord FindRecord(string name)
+        {
+            return phoneBookRecords.Find(phoneBookRecords => phoneBookRecords.Name == name);
+        }
+
+        /// <summary>
+        /// Очистка телефонной книги.
+        /// </summary>
+        public void Clear()
+        {
+            phoneBookRecords.Clear();
+        }
+
+        /// <summary>
+        /// Удаление абонента.
+        /// </summary>
+        /// <param name="record"></param>
+        public void Remove(PhoneBookRecord record)
+        {
+            phoneBookRecords.Remove(record);
+        }
+
+        /// <summary>
+        /// Запись телефонной книги в файл.
+        /// </summary>
+        public void WriteFile()
         {
             using (FileStream phoneBookFile = new FileStream("PhoneBook.txt", FileMode.OpenOrCreate))
             {
@@ -96,13 +96,13 @@ namespace PhoneBook
                     string stringNumber = recordPhoneBook.Number.ToString();
                     byte[] recordNumberByte = System.Text.Encoding.Default.GetBytes(stringNumber);
                     byte[] n = System.Text.Encoding.Default.GetBytes("\n");
-					byte[] b = System.Text.Encoding.Default.GetBytes(" ");
-					phoneBookFile.Write(recordNameByte);
-					phoneBookFile.Write(b);
+                    byte[] b = System.Text.Encoding.Default.GetBytes(" ");
+                    phoneBookFile.Write(recordNameByte);
+                    phoneBookFile.Write(b);
                     phoneBookFile.Write(recordNumberByte);
                     phoneBookFile.Write(n);
                 }
             }
         }
-	}
+    }
 }
