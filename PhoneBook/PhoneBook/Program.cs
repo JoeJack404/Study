@@ -113,6 +113,7 @@ namespace PhoneBook
                         Console.WriteLine("Телефоная книга успешно сохранена");
                         break;
                     case 8:
+                        phoneBook.Clear();
                         phoneBook.LoadFile();
                         Console.WriteLine("Телефоная книга успешно загружена");
                         break;
