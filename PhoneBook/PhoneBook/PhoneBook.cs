@@ -7,7 +7,7 @@ using System.IO;
 
 namespace PhoneBook
 {
-    class PhoneBook
+	class PhoneBook
     {
 		private List<PhoneBookRecord> phoneBookRecords = new List<PhoneBookRecord>();
 		public int Size { get; private set; } = 0;
@@ -83,9 +83,12 @@ namespace PhoneBook
 			phoneBookRecords.Remove(record);
         }
 
+		/// <summary>
+		/// Запись телефонной книги в файл.
+		/// </summary>
 		public void WriteFile()
         {
-            using (FileStream phoneBookFile = new FileStream("PhoneBook.txt", FileMode.Open))
+            using (FileStream phoneBookFile = new FileStream("PhoneBook.txt", FileMode.OpenOrCreate))
             {
                 foreach (PhoneBookRecord recordPhoneBook in phoneBookRecords)
                 {
