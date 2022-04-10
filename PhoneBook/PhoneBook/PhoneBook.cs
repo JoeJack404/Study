@@ -88,7 +88,8 @@ namespace PhoneBook
         /// </summary>
         public void WriteFile()
         {
-            using (FileStream phoneBookFile = new FileStream("PhoneBook.txt", FileMode.OpenOrCreate))
+            string path = @"D:\Study\PhoneBook\Phonebook.txt";
+            using (FileStream phoneBookFile = new FileStream(path, FileMode.OpenOrCreate))
             {
                 foreach (PhoneBookRecord recordPhoneBook in phoneBookRecords)
                 {
@@ -101,6 +102,24 @@ namespace PhoneBook
                     phoneBookFile.Write(space);
                     phoneBookFile.Write(recordNumberByte);
                     phoneBookFile.Write(breakLine);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Загружает телефонную книгу из файла.
+        /// </summary>
+        public async void LoadFile()
+        {
+            string path = @"D:\Study\PhoneBook\Phonebook.txt";
+            using (StreamReader phoneBookFile = new StreamReader(path))
+            {
+                string? line;
+                while ((line = await phoneBookFile.ReadLineAsync()) != null)
+                {
+                    string[] nameNumber = line.Split(' ');
+                    PhoneBookRecord phoneBook = new PhoneBookRecord(nameNumber[0], Convert.ToInt32(nameNumber[1]));
+                    Add(phoneBook);
                 }
             }
         }

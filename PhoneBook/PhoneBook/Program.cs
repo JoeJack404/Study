@@ -110,6 +110,11 @@ namespace PhoneBook
                         break;
                     case 7:
                         phoneBook.WriteFile();
+                        Console.WriteLine("Телефоная книга успешно сохранена");
+                        break;
+                    case 8:
+                        phoneBook.LoadFile();
+                        Console.WriteLine("Телефоная книга успешно загружена");
                         break;
                     case 0:
                         break;
