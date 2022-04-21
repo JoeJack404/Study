@@ -15,9 +15,13 @@ namespace Bachet
             {
                 return numberOfStones - move.Next(0, 4);
             }
-            else
+            else if (numberOfStones > 1)
             {
                 return numberOfStones - move.Next(0, numberOfStones + 1);
+            }
+            else
+            {
+                return 0;
             }
         }
     }
