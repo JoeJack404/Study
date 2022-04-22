@@ -8,10 +8,10 @@ namespace Bachet
 {
     class Game
     {
-        public IForBot Bot { get; set; }
+        public IBot Bot { get; set; }
         public int NumberOfStones { get; set; }
 
-        public Game(IForBot bot, int number)
+        public Game(IBot bot, int number)
         {
             Bot = bot;
             NumberOfStones = number;

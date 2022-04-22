@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bachet
 {
-    class BotEasy : IForBot
+    class BotEasy : IBot
     {
         public int MoveBot(int numberOfStones, int movePlayer)
         {
