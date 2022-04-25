@@ -14,10 +14,9 @@ namespace Bachet
             {
                 if (movePlayer == 0)
                 {
-                    return numberOfStones - 1;
+                    return 1;
                 }
-                int move = 4 - movePlayer;
-                return numberOfStones - move;
+                return 4 - movePlayer;
             }
             else if (numberOfStones > 1)
             {

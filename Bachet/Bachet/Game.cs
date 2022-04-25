@@ -10,16 +10,53 @@ namespace Bachet
     {
         public IBot Bot { get; set; }
         public int NumberOfStones { get; set; }
+        public int Winner { get; set; }
+        public string Player { get; set; }
 
-        public Game(IBot bot, int number)
+        public Game(IBot bot, string player, int number = 21)
         {
             Bot = bot;
             NumberOfStones = number;
+            Player = player;
         }
 
-        public void Move(int number, int movePlayer)
+        public int Move(int movePlayer)
         {
-            NumberOfStones = Bot.MoveBot(number, movePlayer);
+            int moveBot = Bot.MoveBot(NumberOfStones, movePlayer);
+            NumberOfStones = NumberOfStones - moveBot;
+            return moveBot;
+        }
+
+        public int GameFirstMoveBot()
+        {
+            int movePlayer = 0;
+            while(NumberOfStones != 0)
+            {
+                if (NumberOfStones == 1)
+                {
+                    NumberOfStones = 0;
+                    Winner = 0;
+                }
+                else
+                {
+                    Move(movePlayer);
+                    if (NumberOfStones == 0)
+                    {
+                        Winner = 0;
+                    }
+                    else
+                    {
+                        movePlayer = Convert.ToInt32(Console.ReadLine());
+                        Winner = 1;
+                    }
+                }
+            }
+            return Winner;
+        }
+
+        public void GameFirstMovePlayer()
+        {
+
         }
     }
 }
