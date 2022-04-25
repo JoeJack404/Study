@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Bachet
 {
@@ -12,6 +13,7 @@ namespace Bachet
         public int NumberOfStones { get; set; }
         public int Winner { get; set; }
         public string Player { get; set; }
+        public Stopwatch GameTime { get; set; }
 
         public Game(IBot bot, string player, int number = 21)
         {
@@ -29,6 +31,8 @@ namespace Bachet
 
         public int GameFirstMoveBot()
         {
+            GameTime = new Stopwatch();
+            GameTime.Start();
             int movePlayer = 0;
             while(NumberOfStones != 0)
             {
@@ -51,6 +55,7 @@ namespace Bachet
                     }
                 }
             }
+            GameTime.Stop();
             return Winner;
         }
 
