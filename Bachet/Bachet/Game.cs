@@ -28,58 +28,5 @@ namespace Bachet
             NumberOfStones = NumberOfStones - moveBot;
             return moveBot;
         }
-
-        public void GameFirstMoveBot()
-        {
-            GameTime = new Stopwatch();
-            GameTime.Start();
-            int movePlayer = 0;
-            while(NumberOfStones != 0)
-            {
-                if (NumberOfStones == 1)
-                {
-                    NumberOfStones = 0;
-                    Winner = 0;
-                }
-                else
-                {
-                    int moveBot = Move(movePlayer);
-                    if (NumberOfStones == 0)
-                    {
-                        Winner = 0;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Компьютер взял {0} камешка, осталось {1}", moveBot, NumberOfStones);
-                        Console.WriteLine("Сколько камней возьмете Вы?");
-                        movePlayer = Convert.ToInt32(Console.ReadLine());
-                        Winner = 1;
-                    }
-                }
-            }
-            GameTime.Stop();
-        }
-
-        public void GameFirstMovePlayer()
-        {
-            GameTime = new Stopwatch();
-            GameTime.Start();
-            while(NumberOfStones != 0)
-            {
-                if (NumberOfStones == 1)
-                {
-                    Winner = 1;
-                }
-                else
-                {
-                    Console.WriteLine("{0} камней осталось, Ваш ход", NumberOfStones);
-                    int movePlayer = Convert.ToInt32(Console.ReadLine());
-                    int moveBot = Move(movePlayer);
-                    Console.WriteLine("Комньютер взял {0} камешка", moveBot);
-                    Winner = 0;
-                }
-            }
-            GameTime.Stop();
-        }
     }
 }
