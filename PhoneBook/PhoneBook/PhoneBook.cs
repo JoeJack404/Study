@@ -10,17 +10,6 @@ namespace PhoneBook
     class PhoneBook
     {
         private List<PhoneBookRecord> phoneBookRecords = new List<PhoneBookRecord>();
-        private int size;
-        public int Size 
-        {   get
-            {
-                return size;
-            }
-            private set
-            {
-                size = phoneBookRecords.Count;
-            }
-        }
 
         /// <summary>
         /// Добавлениенового абонента.
@@ -99,8 +88,8 @@ namespace PhoneBook
         /// </summary>
         public void WriteFile()
         {
-            string path = "phoneBookFile.txt";
-            using (FileStream phoneBookFile = new FileStream(path, FileMode.OpenOrCreate))
+            string fileName = "phoneBookFile.txt";
+            using (FileStream phoneBookFile = new FileStream(fileName, FileMode.OpenOrCreate))
             {
                 foreach (PhoneBookRecord recordPhoneBook in phoneBookRecords)
                 {
@@ -117,14 +106,14 @@ namespace PhoneBook
         /// </summary>
         public async void LoadFile()
         {
-            string path = "phoneBookFile.txt";
-            if (!File.Exists(path))
+            string fileName = "phoneBookFile.txt";
+            if (!File.Exists(fileName))
             {
                 Console.WriteLine("К сожалению, телефонная книга еще не существует, но Вы можете ее создать");
             }
             else
             {
-                using (StreamReader phoneBookFile = new StreamReader(path))
+                using (StreamReader phoneBookFile = new StreamReader(fileName))
                 {
                     string? line;
                     while ((line = await phoneBookFile.ReadLineAsync()) != null)
