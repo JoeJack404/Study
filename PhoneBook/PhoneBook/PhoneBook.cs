@@ -10,6 +10,7 @@ namespace PhoneBook
     class PhoneBook
     {
         private List<PhoneBookRecord> phoneBookRecords = new List<PhoneBookRecord>();
+        public int Size { get { return phoneBookRecords.Count; } }
 
         /// <summary>
         /// Добавлениенового абонента.
