@@ -10,7 +10,17 @@ namespace PhoneBook
     class PhoneBook
     {
         private List<PhoneBookRecord> phoneBookRecords = new List<PhoneBookRecord>();
-        public int Size { get; private set; } = 0;
+        private int size;
+        public int Size 
+        {   get
+            {
+                return size;
+            }
+            private set
+            {
+                size = phoneBookRecords.Count;
+            }
+        }
 
         /// <summary>
         /// Добавлениенового абонента.
@@ -19,7 +29,6 @@ namespace PhoneBook
         public void Add(PhoneBookRecord phoneBookRecord)
         {
             phoneBookRecords.Add(phoneBookRecord);
-            ++Size;
         }
 
         /// <summary>
@@ -32,7 +41,9 @@ namespace PhoneBook
                 Console.WriteLine("Имя: {0} Номер телефона: {1}", record.Name, record.Number);
             }
             if (phoneBookRecords.Count == 0)
+            {
                 Console.WriteLine("Телефонная книга пуста");
+            }
         }
 
         /// <summary>
@@ -88,20 +99,15 @@ namespace PhoneBook
         /// </summary>
         public void WriteFile()
         {
-            string path = @"D:\Study\PhoneBook\Phonebook.txt";
+            string path = "phoneBookFile.txt";
             using (FileStream phoneBookFile = new FileStream(path, FileMode.OpenOrCreate))
             {
                 foreach (PhoneBookRecord recordPhoneBook in phoneBookRecords)
                 {
-                    byte[] recordNameByte = Encoding.Default.GetBytes(recordPhoneBook.Name);
                     string stringNumber = recordPhoneBook.Number.ToString();
-                    byte[] recordNumberByte = Encoding.Default.GetBytes(stringNumber);
-                    byte[] breakLine = Encoding.Default.GetBytes("\n");
-                    byte[] space = Encoding.Default.GetBytes(" ");
-                    phoneBookFile.Write(recordNameByte);
-                    phoneBookFile.Write(space);
-                    phoneBookFile.Write(recordNumberByte);
-                    phoneBookFile.Write(breakLine);
+                    string line = recordPhoneBook.Name + " " + stringNumber + "\n";
+                    byte[] lineByte = Encoding.Default.GetBytes(line);
+                    phoneBookFile.Write(lineByte);
                 }
             }
         }
@@ -111,15 +117,22 @@ namespace PhoneBook
         /// </summary>
         public async void LoadFile()
         {
-            string path = @"D:\Study\PhoneBook\Phonebook.txt";
-            using (StreamReader phoneBookFile = new StreamReader(path))
+            string path = "phoneBookFile.txt";
+            if (!File.Exists(path))
             {
-                string? line;
-                while ((line = await phoneBookFile.ReadLineAsync()) != null)
+                Console.WriteLine("К сожалению, телефонная книга еще не существует, но Вы можете ее создать");
+            }
+            else
+            {
+                using (StreamReader phoneBookFile = new StreamReader(path))
                 {
-                    string[] nameNumber = line.Split(' ');
-                    PhoneBookRecord phoneBook = new PhoneBookRecord(nameNumber[0], Convert.ToInt32(nameNumber[1]));
-                    Add(phoneBook);
+                    string? line;
+                    while ((line = await phoneBookFile.ReadLineAsync()) != null)
+                    {
+                        string[] nameNumber = line.Split(' ');
+                        PhoneBookRecord phoneBook = new PhoneBookRecord(nameNumber[0], Convert.ToInt32(nameNumber[1]));
+                        Add(phoneBook);
+                    }
                 }
             }
         }

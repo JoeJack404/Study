@@ -1,6 +1,0 @@
-Danya 11
-Natka 23
-2000 66
-Artem 88
-Ivan 88
-Dima 22
