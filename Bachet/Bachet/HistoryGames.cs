@@ -19,24 +19,21 @@ namespace Bachet
         {
             using (FileStream historyFile = new FileStream("BachetHistory.txt", FileMode.OpenOrCreate))
             {
-                byte[] player = Encoding.Default.GetBytes(CurrentGame.Player);
-                byte[] lineBreak = Encoding.Default.GetBytes("\n");
-                byte[] space = Encoding.Default.GetBytes(" ");
-                historyFile.Write(player);
-                historyFile.Write(space);
-                historyFile.Write(lineBreak);
+                string line = CurrentGame.Player + " " + CurrentGame.NumberOfStones + " " + CurrentGame.Winner + " " + CurrentGame.Bot + " " + CurrentGame.GameTime.ToString() + "\n";
+                byte[] lineByte = Encoding.Default.GetBytes(line);
+                historyFile.Write(lineByte);
             }
         }
 
-        public async void LoadHistoryGames()
-        {
-            string path = @"";
-            using (FileStream historyFile = File.OpenRead(path))
-            {
-                byte[] buffer = new byte[historyFile.Length];
-                await historyFile.ReadAsync(buffer, 0, buffer.Length);
-                string textFromFile = Encoding.Default.GetString(buffer);
-            }
-        }
+        //public async void LoadHistoryGames()
+        //{
+        //    string path = @"";
+        //    using (FileStream historyFile = File.OpenRead(path))
+        //    {
+        //        byte[] buffer = new byte[historyFile.Length];
+        //        await historyFile.ReadAsync(buffer, 0, buffer.Length);
+        //        string textFromFile = Encoding.Default.GetString(buffer);
+        //    }
+        //}
     }
 }
