@@ -8,16 +8,16 @@ namespace Bachet
 {
     class BotEasy : IBot
     {
-        public int MoveBot(int numberOfStones, int movePlayer)
+        public int MoveBot(int currentNumberOfStones)
         {
             var move = new Random();
-            if (numberOfStones > 4)
+            if (currentNumberOfStones > 4)
             {
                 return move.Next(1, 4);
             }
-            else if (numberOfStones > 1)
+            else if (currentNumberOfStones > 1)
             {
-                return move.Next(1, numberOfStones + 1);
+                return move.Next(1, currentNumberOfStones + 1);
             }
             else
             {
