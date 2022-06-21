@@ -11,10 +11,9 @@ namespace Bachet
     {
         public IBot Bot { get; set; }
         public int NumberOfStones { get; set; }
-        public string Winner { get; set; }
         public string Player { get; set; }
-        public Stopwatch GameTime { get; set; }
         public int CurrentNumberOfStones { get; set; }
+        public int CurrentBotMove { get; set; }
         public bool GameOver { get { return CurrentNumberOfStones == 0; } }
 
         public Game(string player, int number = 21)
@@ -24,11 +23,16 @@ namespace Bachet
             CurrentNumberOfStones = number;
         }
 
-        public int Move(int movePlayer)
+        public void BotMove()
         {
-            int moveBot = Bot.MoveBot(CurrentNumberOfStones, movePlayer);
+            int moveBot = Bot.MoveBot(CurrentNumberOfStones, NumberOfStones);
             CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
-            return moveBot;
+            CurrentBotMove = moveBot;
+        }
+
+        public void PlayerMove(int playerMove)
+        {
+            CurrentNumberOfStones = CurrentNumberOfStones - playerMove;
         }
 
         public void CreateBotHard()
