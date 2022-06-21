@@ -8,7 +8,7 @@ namespace Bachet
 {
     class BotHard : IBot
     {
-        public int MoveBot(int numberOfStones, int currentNumberOfStones)
+        public int MoveBot(int currentNumberOfStones)
         {
             if (currentNumberOfStones % 4 == 0)
             {

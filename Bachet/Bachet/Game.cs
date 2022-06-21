@@ -25,7 +25,7 @@ namespace Bachet
 
         public void BotMove()
         {
-            int moveBot = Bot.MoveBot(CurrentNumberOfStones, NumberOfStones);
+            int moveBot = Bot.MoveBot(CurrentNumberOfStones);
             CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
             CurrentBotMove = moveBot;
         }
