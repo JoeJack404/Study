@@ -9,11 +9,12 @@ namespace Bachet
 {
     class Game
     {
-        public IBot Bot { get; set; }
-        public int NumberOfStones { get; set; }
-        public string Player { get; set; }
-        public int CurrentNumberOfStones { get; set; }
-        public int CurrentBotMove { get; set; }
+        public IBot Bot { get; private set; }
+        public int NumberOfStones { get; private set; }
+        public string Player { get; private set; }
+        public int CurrentNumberOfStones { get; private set; }
+        public int CurrentBotMove { get; private set; }
+        public string PreviousMove { get; private set; }
         public bool GameOver { get { return CurrentNumberOfStones == 0; } }
 
         public Game(string player, int number = 21)
@@ -25,26 +26,49 @@ namespace Bachet
 
         public void BotMove()
         {
-            int moveBot = Bot.MoveBot(CurrentNumberOfStones);
-            CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
-            CurrentBotMove = moveBot;
+            if (!GameOver)
+            {
+                if (PreviousMove == null ^ PreviousMove == "Player")
+                {
+                    int moveBot = Bot.MoveBot(CurrentNumberOfStones);
+                    CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
+                    CurrentBotMove = moveBot;
+                    PreviousMove = "Bot";
+                }
+            }
         }
 
         public void PlayerMove(int playerMove)
         {
-            CurrentNumberOfStones = CurrentNumberOfStones - playerMove;
+            if (!GameOver)
+            {
+                if (playerMove < 4)
+                {
+                    if (PreviousMove == null ^ PreviousMove == "Bot")
+                    {
+                        CurrentNumberOfStones = CurrentNumberOfStones - playerMove;
+                        PreviousMove = "Player";
+                    }
+                }
+            }
         }
 
         public void CreateBotHard()
         {
-            BotHard botHard = new BotHard();
-            Bot = botHard;
+            if (Bot == null)
+            {
+                BotHard botHard = new BotHard();
+                Bot = botHard;
+            }
         }
 
         public void CreateBotEasy()
         {
-            BotEasy botEasy = new BotEasy();
-            Bot = botEasy;
+            if (Bot == null)
+            {
+                BotEasy botEasy = new BotEasy();
+                Bot = botEasy;
+            }
         }
     }
 }
