@@ -13,7 +13,7 @@ namespace Bachet
         public int NumberOfStones { get; private set; }
         public string Player { get; private set; }
         public int CurrentNumberOfStones { get; private set; }
-        public int CurrentBotMove { get; private set; }
+        public int CurrentMoveBot { get; private set; }
         public string PreviousMove { get; private set; }
         public bool GameOver { get { return CurrentNumberOfStones == 0; } }
 
@@ -32,7 +32,7 @@ namespace Bachet
                 {
                     int moveBot = Bot.MoveBot(CurrentNumberOfStones);
                     CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
-                    CurrentBotMove = moveBot;
+                    CurrentMoveBot = moveBot;
                     PreviousMove = "Bot";
                 }
             }
@@ -42,7 +42,7 @@ namespace Bachet
         {
             if (!GameOver)
             {
-                if (playerMove < 4)
+                if (playerMove < 4 & playerMove <= CurrentNumberOfStones)
                 {
                     if (PreviousMove == null ^ PreviousMove == "Bot")
                     {
