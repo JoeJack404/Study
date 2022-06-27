@@ -26,14 +26,33 @@ namespace Bachet
 
         public void BotMove()
         {
-            if (!GameOver)
+            try
             {
-                if (PreviousMove == null ^ PreviousMove == "Player")
+
+                if (!GameOver)
                 {
-                    int moveBot = Bot.MoveBot(CurrentNumberOfStones);
-                    CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
-                    CurrentMoveBot = moveBot;
-                    PreviousMove = "Bot";
+                    if (PreviousMove == null ^ PreviousMove == "Player")
+                    {
+                        int moveBot = Bot.MoveBot(CurrentNumberOfStones);
+                        CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
+                        CurrentMoveBot = moveBot;
+                        PreviousMove = "Bot";
+                    }
+                    else
+                    {
+                        throw new MoveOrderException();
+                    }
+                }
+                else
+                {
+                    throw new GameOverException();
+                }
+            }
+            catch(Exception ex)
+            {
+                if (ex is GameOverException)
+                {
+
                 }
             }
         }

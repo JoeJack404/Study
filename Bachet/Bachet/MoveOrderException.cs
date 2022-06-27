@@ -6,14 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bachet
 {
-    class MoveResponse
+    class MoveOrderException : Exception
     {
-        enum MoveError
-        {
-            None,
-            GameOverError,
-            MoveOrderError,
-
-        }
     }
 }
