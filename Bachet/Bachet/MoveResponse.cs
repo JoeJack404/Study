@@ -8,12 +8,6 @@ namespace Bachet
 {
     class MoveResponse
     {
-        enum MoveError
-        {
-            None,
-            GameOverError,
-            MoveOrderError,
-
-        }
+        public string Error { get; set; }
     }
 }

@@ -8,6 +8,5 @@ namespace Bachet
 {
     class GameOverException : Exception
     {
-        MoveResponse MoveResponse { get; set; }
     }
 }

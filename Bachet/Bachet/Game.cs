@@ -16,6 +16,18 @@ namespace Bachet
         public int CurrentMoveBot { get; private set; }
         public string PreviousMove { get; private set; }
         public bool GameOver { get { return CurrentNumberOfStones == 0; } }
+        enum MoveError
+        {
+            None,
+            GameOverError,
+            MoveOrderError,
+            MoreStonesTakenThanLeft,
+            MoreStonesTakenThanAllowed,
+        }
+        enum CreateBotError
+        {
+            None,
+        }
 
         public Game(string player, int number = 21)
         {
@@ -24,11 +36,11 @@ namespace Bachet
             CurrentNumberOfStones = number;
         }
 
-        public void BotMove()
+        public MoveResponse BotMove()
         {
+            MoveResponse moveResponce = new MoveResponse();
             try
             {
-
                 if (!GameOver)
                 {
                     if (PreviousMove == null ^ PreviousMove == "Player")
@@ -37,6 +49,7 @@ namespace Bachet
                         CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
                         CurrentMoveBot = moveBot;
                         PreviousMove = "Bot";
+                        moveResponce.Error = MoveError.None.ToString();
                     }
                     else
                     {
@@ -47,13 +60,19 @@ namespace Bachet
                 {
                     throw new GameOverException();
                 }
+                return moveResponce;
             }
             catch(Exception ex)
             {
                 if (ex is GameOverException)
                 {
-
+                    moveResponce.Error = MoveError.GameOverError.ToString();
                 }
+                else
+                {
+                    moveResponce.Error = MoveError.MoveOrderError.ToString();
+                }
+                return moveResponce;
             }
         }
 
