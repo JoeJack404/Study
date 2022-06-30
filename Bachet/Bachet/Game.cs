@@ -138,21 +138,51 @@ namespace Bachet
             }
         }
 
-        public void CreateBotHard()
+        public CreateBotResponce CreateBotHard()
         {
-            if (Bot == null)
+            CreateBotResponce createBotResponce = new CreateBotResponce();
+            try
             {
-                BotHard botHard = new BotHard();
-                Bot = botHard;
+                if (Bot == null)
+                {
+                    BotHard botHard = new BotHard();
+                    Bot = botHard;
+                    createBotResponce.Error = CreateBotErrorEnum.None;
+                }
+                else
+                {
+                    throw new CreateBotException();
+                }
+                return createBotResponce;
+            }
+            catch (CreateBotException)
+            {
+                createBotResponce.Error = CreateBotErrorEnum.BotAlreadyCreatedError;
+                return createBotResponce;
             }
         }
 
-        public void CreateBotEasy()
+        public CreateBotResponce CreateBotEasy()
         {
-            if (Bot == null)
+            CreateBotResponce createBotResponce = new CreateBotResponce();
+            try
             {
-                BotEasy botEasy = new BotEasy();
-                Bot = botEasy;
+                if (Bot == null)
+                {
+                    BotEasy botEasy = new BotEasy();
+                    Bot = botEasy;
+                    createBotResponce.Error = CreateBotErrorEnum.None;
+                }
+                else
+                {
+                    throw new CreateBotException();
+                }
+                return createBotResponce;
+            }
+            catch (CreateBotException)
+            {
+                createBotResponce.Error = CreateBotErrorEnum.BotAlreadyCreatedError;
+                return createBotResponce;
             }
         }
     }
