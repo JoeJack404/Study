@@ -14,26 +14,15 @@ namespace Bachet
         public string Player { get; private set; }
         public int CurrentNumberOfStones { get; private set; }
         public int CurrentMoveBot { get; private set; }
-        public string PreviousMove { get; private set; }
+        public PreviousMoveEnum PreviousMove { get; private set; }
         public bool GameOver { get { return CurrentNumberOfStones == 0; } }
-        enum MoveError
-        {
-            None,
-            GameOverError,
-            MoveOrderError,
-            MoreStonesTakenThanLeft,
-            MoreStonesTakenThanAllowed,
-        }
-        enum CreateBotError
-        {
-            None,
-        }
 
         public Game(string player, int number = 21)
         {
             NumberOfStones = number;
             Player = player;
             CurrentNumberOfStones = number;
+            PreviousMove = PreviousMoveEnum.None;
         }
 
         public MoveResponse BotMove()
@@ -43,13 +32,13 @@ namespace Bachet
             {
                 if (!GameOver)
                 {
-                    if (PreviousMove == null ^ PreviousMove == "Player")
+                    if (PreviousMove != PreviousMoveEnum.Bot)
                     {
                         int moveBot = Bot.MoveBot(CurrentNumberOfStones);
                         CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
                         CurrentMoveBot = moveBot;
-                        PreviousMove = "Bot";
-                        moveResponce.Error = MoveError.None.ToString();
+                        PreviousMove = PreviousMoveEnum.Bot;
+                        moveResponce.Error = MoveErrorEnum.None;
                     }
                     else
                     {
@@ -64,30 +53,88 @@ namespace Bachet
             }
             catch(Exception ex)
             {
-                if (ex is GameOverException)
+                switch (ex)
                 {
-                    moveResponce.Error = MoveError.GameOverError.ToString();
-                }
-                else
-                {
-                    moveResponce.Error = MoveError.MoveOrderError.ToString();
+                    case GameOverException:
+                        {
+                            moveResponce.Error = MoveErrorEnum.GameOverError;
+                            break;
+                        }
+                    case MoveOrderException:
+                        {
+                            moveResponce.Error = MoveErrorEnum.MoveOrderError;
+                            break;
+                        }
                 }
                 return moveResponce;
+
             }
         }
 
-        public void PlayerMove(int playerMove)
+        public MoveResponse PlayerMove(int playerMove)
         {
-            if (!GameOver)
+            MoveResponse moveResponse = new MoveResponse();
+            try
             {
-                if (playerMove < 4 & playerMove <= CurrentNumberOfStones)
+                if (!GameOver)
                 {
-                    if (PreviousMove == null ^ PreviousMove == "Bot")
+                    if (playerMove < 4)
                     {
-                        CurrentNumberOfStones = CurrentNumberOfStones - playerMove;
-                        PreviousMove = "Player";
+                        if (playerMove < CurrentNumberOfStones)
+                        {
+                            if (PreviousMove != PreviousMoveEnum.Player)
+                            {
+                                CurrentNumberOfStones = CurrentNumberOfStones - playerMove;
+                                PreviousMove = PreviousMoveEnum.Player;
+                                moveResponse.Error = MoveErrorEnum.None;
+                            }
+                            else
+                            {
+                                throw new MoveOrderException();
+                            }
+                        }
+                        else
+                        {
+                            throw new MoveStonesTakenThanLeftException();
+                        }
+                    }
+                    else
+                    {
+                        throw new MoreStonesTakenThanAllowedException();
                     }
                 }
+                else
+                {
+                    throw new GameOverException();
+                }
+                return moveResponse;
+            }
+            catch (Exception ex)
+            {
+                switch (ex)
+                {
+                    case GameOverException:
+                        {
+                            moveResponse.Error = MoveErrorEnum.GameOverError;
+                            break;
+                        }
+                    case MoreStonesTakenThanAllowedException:
+                        {
+                            moveResponse.Error = MoveErrorEnum.MoreStonesTakenThanAllowed;
+                            break;
+                        }
+                    case MoveStonesTakenThanLeftException:
+                        {
+                            moveResponse.Error = MoveErrorEnum.MoreStonesTakenThanLeft;
+                            break;
+                        }
+                    case MoveOrderException:
+                        {
+                            moveResponse.Error = MoveErrorEnum.MoveOrderError;
+                            break;
+                        }
+                }
+                return moveResponse;
             }
         }
 

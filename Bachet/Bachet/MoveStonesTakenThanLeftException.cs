@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bachet
 {
-    class MoveResponse
+    class MoveStonesTakenThanLeftException : Exception
     {
-        public MoveErrorEnum Error { get; set; }
     }
 }

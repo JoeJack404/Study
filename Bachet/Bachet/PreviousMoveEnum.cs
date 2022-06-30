@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Bachet
 {
-    class MoveResponse
+    public enum PreviousMoveEnum
     {
-        public MoveErrorEnum Error { get; set; }
+        None,
+        Bot,
+        Player
     }
 }
