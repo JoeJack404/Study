@@ -8,9 +8,6 @@ namespace Bachet
 {
     interface IBot
     {
-        public int MoveBot(int numberOfStones)
-        {
-            return numberOfStones;
-        }
+        public int MoveBot(int numberOfStones);
     }
 }

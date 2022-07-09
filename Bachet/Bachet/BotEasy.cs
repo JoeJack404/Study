@@ -8,6 +8,11 @@ namespace Bachet
 {
     class BotEasy : IBot
     {
+        /// <summary>
+        /// Ход бота.
+        /// </summary>
+        /// <param name="currentNumberOfStones">Количество оставшихся камней.</param>
+        /// <returns>Сколько камней берет бот.</returns>
         public int MoveBot(int currentNumberOfStones)
         {
             var move = new Random();

@@ -11,7 +11,10 @@ namespace Bachet
     {
         public IBot Bot { get; private set; }
         public int NumberOfStones { get; private set; }
-        public string Player { get; private set; }
+        /// <summary>
+        /// Имя игрока.
+        /// </summary>
+        public string Player { get; private set; }     //Будет необходимо для истории игры//
         public int CurrentNumberOfStones { get; private set; }
         public int CurrentMoveBot { get; private set; }
         public PreviousMoveEnum PreviousMove { get; private set; }
@@ -24,7 +27,10 @@ namespace Bachet
             CurrentNumberOfStones = number;
             PreviousMove = PreviousMoveEnum.None;
         }
-
+        /// <summary>
+        /// Ход игры.
+        /// </summary>
+        /// <returns>Сообщение об ошибке.</returns>
         public MoveResponse BotMove()
         {
             MoveResponse moveResponce = new MoveResponse();
@@ -70,7 +76,11 @@ namespace Bachet
 
             }
         }
-
+        /// <summary>
+        /// Ход игрока.
+        /// </summary>
+        /// <param name="playerMove">Количество взятых камней.</param>
+        /// <returns>Сообщение об ошибке.</returns>
         public MoveResponse PlayerMove(int playerMove)
         {
             MoveResponse moveResponse = new MoveResponse();
@@ -137,7 +147,10 @@ namespace Bachet
                 return moveResponse;
             }
         }
-
+        /// <summary>
+        /// Создает сложного бота
+        /// </summary>
+        /// <returns>Сообщение об ошибке.</returns>
         public CreateBotResponce CreateBotHard()
         {
             CreateBotResponce createBotResponce = new CreateBotResponce();
@@ -161,7 +174,10 @@ namespace Bachet
                 return createBotResponce;
             }
         }
-
+        /// <summary>
+        /// Создает простого бота.
+        /// </summary>
+        /// <returns>Сообщение об ошибке.</returns>
         public CreateBotResponce CreateBotEasy()
         {
             CreateBotResponce createBotResponce = new CreateBotResponce();
