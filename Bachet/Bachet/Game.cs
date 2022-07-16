@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
 
 namespace Bachet
 {
@@ -14,7 +9,7 @@ namespace Bachet
         /// <summary>
         /// Имя игрока.
         /// </summary>
-        public string Player { get; private set; }     //Будет необходимо для истории игры//
+        public string PlayerName { get; private set; }     //Будет необходимо для истории игры//
         public int CurrentNumberOfStones { get; private set; }
         public int CurrentMoveBot { get; private set; }
         public PreviousMoveEnum PreviousMove { get; private set; }
@@ -23,7 +18,7 @@ namespace Bachet
         public Game(string player, int number = 21)
         {
             NumberOfStones = number;
-            Player = player;
+            PlayerName = player;
             CurrentNumberOfStones = number;
             PreviousMove = PreviousMoveEnum.None;
         }
@@ -33,27 +28,34 @@ namespace Bachet
         /// <returns>Сообщение об ошибке.</returns>
         public MoveResponse BotMove()
         {
-            MoveResponse moveResponce = new MoveResponse();
+            MoveResponse moveResponce = new();
             try
             {
-                if (!GameOver)
+                if (Bot != null)
                 {
-                    if (PreviousMove != PreviousMoveEnum.Bot)
+                    if (!GameOver)
                     {
-                        int moveBot = Bot.MoveBot(CurrentNumberOfStones);
-                        CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
-                        CurrentMoveBot = moveBot;
-                        PreviousMove = PreviousMoveEnum.Bot;
-                        moveResponce.Error = MoveErrorEnum.None;
+                        if (PreviousMove != PreviousMoveEnum.Bot)
+                        {
+                            int moveBot = Bot.MoveBot(CurrentNumberOfStones);
+                            CurrentNumberOfStones = CurrentNumberOfStones - moveBot;
+                            CurrentMoveBot = moveBot;
+                            PreviousMove = PreviousMoveEnum.Bot;
+                            moveResponce.Error = MoveErrorEnum.None;
+                        }
+                        else
+                        {
+                            throw new MoveOrderException("Неправильный порядок хода");
+                        }
                     }
                     else
                     {
-                        throw new MoveOrderException();
+                        throw new GameOverException("Игра закончилась");
                     }
                 }
                 else
                 {
-                    throw new GameOverException();
+                    throw new BotIsNotCreatedException("Бот не создан");
                 }
                 return moveResponce;
             }
@@ -71,6 +73,11 @@ namespace Bachet
                             moveResponce.Error = MoveErrorEnum.MoveOrderError;
                             break;
                         }
+                    case BotIsNotCreatedException:
+                        {
+                            moveResponce.Error = MoveErrorEnum.BotIsNotCreated;
+                            break;
+                        }
                 }
                 return moveResponce;
 
@@ -83,7 +90,7 @@ namespace Bachet
         /// <returns>Сообщение об ошибке.</returns>
         public MoveResponse PlayerMove(int playerMove)
         {
-            MoveResponse moveResponse = new MoveResponse();
+            MoveResponse moveResponse = new();
             try
             {
                 if (!GameOver)
@@ -100,22 +107,22 @@ namespace Bachet
                             }
                             else
                             {
-                                throw new MoveOrderException();
+                                throw new MoveOrderException("Неправильный порядок хода");
                             }
                         }
                         else
                         {
-                            throw new MoveStonesTakenThanLeftException();
+                            throw new MoveStonesTakenThanLeftException("Больше камней, чем осталось");
                         }
                     }
                     else
                     {
-                        throw new MoreStonesTakenThanAllowedException();
+                        throw new MoreStonesTakenThanAllowedException("Больше камней, чем можно взять");
                     }
                 }
                 else
                 {
-                    throw new GameOverException();
+                    throw new GameOverException("Игра закончилась");
                 }
                 return moveResponse;
             }
@@ -148,7 +155,7 @@ namespace Bachet
             }
         }
         /// <summary>
-        /// Создает сложного бота
+        /// Создает сложного бота.
         /// </summary>
         /// <returns>Сообщение об ошибке.</returns>
         public CreateBotResponce CreateBotHard()
@@ -164,7 +171,7 @@ namespace Bachet
                 }
                 else
                 {
-                    throw new CreateBotException();
+                    throw new CreateBotException("Бот уже создан");
                 }
                 return createBotResponce;
             }
@@ -191,7 +198,7 @@ namespace Bachet
                 }
                 else
                 {
-                    throw new CreateBotException();
+                    throw new CreateBotException("Бот уже создан");
                 }
                 return createBotResponce;
             }

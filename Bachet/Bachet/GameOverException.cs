@@ -8,5 +8,9 @@ namespace Bachet
 {
     class GameOverException : Exception
     {
+        public GameOverException(string message) : base(message)
+        {
+
+        }
     }
 }

@@ -8,5 +8,9 @@ namespace Bachet
 {
     class MoveOrderException : Exception
     {
+        public MoveOrderException(string message) : base(message)
+        {
+
+        }
     }
 }

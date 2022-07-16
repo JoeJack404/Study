@@ -8,5 +8,9 @@ namespace Bachet
 {
     class MoveStonesTakenThanLeftException : Exception
     {
+        public MoveStonesTakenThanLeftException(string message) : base(message)
+        {
+
+        }
     }
 }

@@ -8,5 +8,9 @@ namespace Bachet
 {
     class CreateBotException : Exception
     {
+        public CreateBotException(string message) : base(message)
+        {
+
+        }
     }
 }

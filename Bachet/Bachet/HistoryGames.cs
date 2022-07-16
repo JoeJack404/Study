@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.IO;
 
 namespace Bachet
 {
@@ -19,7 +14,7 @@ namespace Bachet
         {
             using (FileStream historyFile = new FileStream("BachetHistory.txt", FileMode.OpenOrCreate))
             {
-                string line = CurrentGame.Player + " " + CurrentGame.NumberOfStones + " " + CurrentGame.Bot + "\n";
+                string line = CurrentGame.PlayerName + " " + CurrentGame.NumberOfStones + " " + CurrentGame.Bot + "\n";
                 byte[] lineByte = Encoding.Default.GetBytes(line);
                 historyFile.Write(lineByte);
             }

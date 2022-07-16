@@ -8,5 +8,9 @@ namespace Bachet
 {
     class MoreStonesTakenThanAllowedException : Exception
     {
+        public MoreStonesTakenThanAllowedException(string message) : base(message)
+        {
+
+        }
     }
 }

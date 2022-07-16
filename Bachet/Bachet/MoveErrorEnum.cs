@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Bachet
+﻿namespace Bachet
 {
     public enum MoveErrorEnum
     {
@@ -12,6 +6,7 @@ namespace Bachet
         GameOverError,
         MoreStonesTakenThanLeft,
         MoreStonesTakenThanAllowed,
-        MoveOrderError
+        MoveOrderError,
+        BotIsNotCreated
     }
 }
